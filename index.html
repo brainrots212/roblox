@@ -90,14 +90,13 @@
             justify-content: center;
             margin-right: 15px;
             overflow: hidden;
-            background: #fff;
-            border: 2px solid var(--primary);
+            background: #f0f0f0;
         }
         
         .brainrot-icon img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
         }
         
         .brainrot-content {
@@ -270,13 +269,16 @@
             width: 30px;
             height: 30px;
             border-radius: 5px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 16px;
-            color: var(--darker);
-            font-weight: bold;
+            overflow: hidden;
+        }
+        
+        .winner-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
         
         .winner-text {
@@ -395,7 +397,7 @@
     <div class="container">
         <div class="header">
             <h1>CLAIM YOUR BRAINROT</h1>
-            <h2>Strawberry Elephant</h2>
+            <h2>BrainrotZone.fun</h2>
         </div>
         
         <div class="brainrots-list" id="brainrots-list">
@@ -433,7 +435,7 @@
     
     <!-- Winner Popup -->
     <div class="winner-popup" id="winner-popup">
-        <div class="winner-icon">!</div>
+        <div class="winner-icon" id="winner-icon"></div>
         <div class="winner-text" id="winner-text"></div>
     </div>
     
@@ -446,6 +448,7 @@
     <script>
         // Brainrots data with images
         const brainrots = [
+            { name: "Strawberry Elephant", image: "https://static.wikia.nocookie.net/stealabr/images/5/58/Strawberryelephant.png" },
             { name: "to to to sahur", image: "https://i.postimg.cc/gj2n7dQX/Screenshot-2025-09-20-at-18-51-02-removebg-preview.png" },
             { name: "Los Tacoritas", image: "https://i.postimg.cc/Wz0qrSBS/unnamed-removebg-preview.png" },
             { name: "MARIACHI CORAZONI", image: "https://i.postimg.cc/SKyW70d5/MARIACHI-CORAZONI.png" },
@@ -505,12 +508,12 @@
             item.className = 'brainrot-item';
             item.innerHTML = `
                 <div class="brainrot-icon">
-                    <img src="${brainrot.image}" alt="${brainrot.name}" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAiIGhlaWdodD0iNTAiIHZpZXdCb3g9IjAgMCA1MCA1MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjUwIiBoZWlnaHQ9IjUwIiBmaWxsPSIjMDBmZmNjIi8+Cjx0ZXh0IHg9IjI1IiB5PSIyNSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjI0IiBmaWxsPSIjMDAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0iY2VudHJhbCI+QzwvdGV4dD4KPC9zdmc+'">
+                    <img src="${brainrot.image}" alt="${brainrot.name}">
                 </div>
                 <div class="brainrot-content">
                     <div class="brainrot-name">${brainrot.name}</div>
                 </div>
-                <button class="claim-btn" data-item="${brainrot.name}" data-image="${brainrot.image}">Claim</button>
+                <button class="claim-btn" data-item="${brainrot.name}">Claim</button>
             `;
             brainrotsList.appendChild(item);
         });
@@ -518,9 +521,9 @@
         // Add floating items
         document.addEventListener('DOMContentLoaded', () => {
             const container = document.getElementById('floating-items');
-            const images = brainrots.map(b => b.image);
+            const images = brainrots.map(brainrot => brainrot.image);
             
-            for (let i = 0; i < 15; i++) {
+            for (let i = 0; i < 10; i++) {
                 const img = document.createElement('img');
                 img.src = images[Math.floor(Math.random() * images.length)];
                 img.classList.add('floating-item');
@@ -549,17 +552,17 @@
         const submitBtn = document.getElementById('submit-btn');
         const usernameInput = document.getElementById('username-input');
         const verifyBtn = document.getElementById('verify-btn');
-        const loadingItemImg = document.getElementById('loading-item-img');
         
         let selectedItem = null;
+        let selectedItemImage = null;
         
         // Claim button event listeners
         document.querySelectorAll('.claim-btn').forEach(btn => {
             btn.addEventListener('click', function() {
-                selectedItem = {
-                    name: this.getAttribute('data-item'),
-                    image: this.getAttribute('data-image')
-                };
+                selectedItem = this.getAttribute('data-item');
+                // Find the corresponding image
+                const brainrot = brainrots.find(b => b.name === selectedItem);
+                selectedItemImage = brainrot ? brainrot.image : null;
                 usernameModal.style.display = 'flex';
             });
         });
@@ -586,14 +589,21 @@
             const generatorTitle = document.getElementById('generator-title');
             const progressFill = document.getElementById('progress-fill');
             const gameTip = document.getElementById('game-tip');
+            const loadingItemImg = document.getElementById('loading-item-img');
             
             generatorTitle.textContent = "Connecting to servers...";
             progressFill.style.width = "0%";
             progressFill.textContent = "0%";
             gameTip.textContent = "";
             verifyBtn.style.display = 'none';
-            loadingItemImg.style.display = 'block';
-            loadingItemImg.src = selectedItem.image;
+            
+            // Show the item image if available
+            if (selectedItemImage) {
+                loadingItemImg.src = selectedItemImage;
+                loadingItemImg.style.display = 'block';
+            } else {
+                loadingItemImg.style.display = 'none';
+            }
             
             await new Promise(resolve => setTimeout(resolve, 1500));
             generatorTitle.textContent = `Finding user: ${username}...`;
@@ -624,7 +634,9 @@
         
         // Winner popup logic
         const winnerUsers = [
-            'PixelPioneer', 'BlockBash99', 'NeonNinja07', 'RoboRangerX', 'CraftyCrafter'
+            'PixelPioneer', 'BlockBash99', 'NeonNinja07', 'RoboRangerX', 'CraftyCrafter',
+            'VoxelVoyager', 'AstroArchitect', 'TurboTumbler23', 'CosmicCreator', 'ShadowShifter',
+            'MysticMiner', 'DragonDuelist', 'QuantumQuester', 'BlazeBreaker', 'AquaAvenger'
         ];
         
         function showWinnerPopup() {
@@ -633,7 +645,10 @@
             
             const popup = document.getElementById('winner-popup');
             const text = document.getElementById('winner-text');
+            const icon = document.getElementById('winner-icon');
             
+            // Set the winner icon to the brainrot image
+            icon.innerHTML = `<img src="${item.image}" alt="${item.name}">`;
             text.innerHTML = `<b>${user}</b> just claimed ${item.name}! 🎉`;
             popup.style.display = 'flex';
             
