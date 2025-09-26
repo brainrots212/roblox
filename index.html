@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Steal A Brainrot</title>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One:wght@400&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #00ffcc;
@@ -21,69 +21,291 @@
             --success: #4CAF50;
             --warning: #FFC107;
             --danger: #F44336;
+            --brainrot-bg: #e6f7ff; /* Light blue background for brainrots */
         }
         
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
         
         body {
-            font-family: 'Fredoka One', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%) !important;
-            min-height: 100vh;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
             color: var(--text);
-            position: relative;
-            overflow-x: hidden;
+            min-height: 100vh;
+            padding: 0;
+            margin: 0;
         }
         
-        body::before {
-            content: '';
+        .container {
+            max-width: 100%;
+            padding: 15px;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 20px 0;
+            margin-bottom: 20px;
+        }
+        
+        .header h1 {
+            font-family: 'Fredoka One', cursive;
+            font-size: 28px;
+            color: var(--primary);
+            text-shadow: 0 0 10px rgba(0, 255, 204, 0.5);
+            margin-bottom: 5px;
+        }
+        
+        .header h2 {
+            font-family: 'Fredoka One', cursive;
+            font-size: 22px;
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+        
+        .brainrots-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .brainrot-item {
+            background-color: var(--brainrot-bg);
+            border-radius: 12px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid var(--accent);
+        }
+        
+        .brainrot-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            overflow: hidden;
+            background: #fff;
+            border: 2px solid var(--primary);
+        }
+        
+        .brainrot-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .brainrot-content {
+            flex: 1;
+        }
+        
+        .brainrot-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .claim-btn {
+            background: linear-gradient(135deg, var(--accent), #ff8e8e);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 15px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 3px 6px rgba(255, 107, 107, 0.3);
+        }
+        
+        .claim-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(255, 107, 107, 0.4);
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
             position: fixed;
-            inset: 0;
-            background-image:
-                radial-gradient(2px 2px at 20px 20px, rgba(255,255,255,0.05), transparent 40%),
-                radial-gradient(2px 2px at 60px 60px, rgba(255,255,255,0.05), transparent 40%);
-            background-size: 120px 120px;
-            opacity: 0.35;
-            pointer-events: none;
-            z-index: -1;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
         }
         
-        .popup {
-            position: absolute;
+        .modal-content {
+            background: var(--light);
+            border-radius: 15px;
+            padding: 20px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--lighter);
+        }
+        
+        .modal h2 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-family: 'Fredoka One', cursive;
+        }
+        
+        .modal input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid var(--lighter);
+            background: var(--darker);
+            color: var(--text);
+            font-size: 16px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+        
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .modal-btn {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .modal-submit {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--darker);
+        }
+        
+        .modal-cancel {
+            background: var(--lighter);
+            color: var(--text);
+        }
+        
+        /* Generator Modal */
+        .generator-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .generator-content {
+            background: var(--light);
+            border-radius: 15px;
+            padding: 20px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--lighter);
+        }
+        
+        .progress-container {
+            margin: 20px 0;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: var(--darker);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--lighter);
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            width: 0%;
+            transition: width 0.5s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--darker);
+            font-weight: bold;
+            font-size: 12px;
+        }
+        
+        /* Winner Popup */
+        .winner-popup {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--light);
+            border-radius: 10px;
+            padding: 10px 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid var(--primary);
+            max-width: 90%;
+        }
+        
+        .winner-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 5px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            color: var(--darker);
+            font-weight: bold;
+        }
+        
+        .winner-text {
+            font-size: 14px;
+            color: var(--text);
+        }
+        
+        /* iOS Popup */
+        .ios-popup {
+            display: none;
+            position: fixed;
             top: 20px;
             right: 20px;
             background: var(--light);
-            border-radius: 20px;
-            padding: 30px;
-            max-width: 350px;
-            width: 300px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            padding: 15px;
+            max-width: 300px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
             z-index: 1000;
-            font-size: 18px;
+            font-size: 14px;
             line-height: 1.4;
             color: var(--text);
             border: 1px solid var(--lighter);
         }
         
-        .popup::after {
-            content: '';
-            position: absolute;
-            top: -10px;
-            right: 10px;
-            width: 0;
-            height: 0;
-            border-left: 15px solid transparent;
-            border-right: 15px solid transparent;
-            border-bottom: 15px solid var(--light);
-        }
-        
         .tiktok-icon {
             display: inline-block;
-            width: 25px;
-            height: 25px;
+            width: 20px;
+            height: 20px;
             background: var(--text-secondary);
             border-radius: 50%;
             margin: 0 5px;
@@ -98,14 +320,14 @@
             left: 50%;
             transform: translate(-50%, -50%);
             color: var(--white);
-            font-size: 14px;
+            font-size: 12px;
             font-weight: bold;
         }
         
         .three-dots {
             display: inline-block;
-            width: 25px;
-            height: 25px;
+            width: 20px;
+            height: 20px;
             background: var(--text-secondary);
             border-radius: 50%;
             margin: 0 5px;
@@ -120,7 +342,7 @@
             left: 50%;
             transform: translate(-50%, -50%);
             color: var(--white);
-            font-size: 14px;
+            font-size: 12px;
             font-weight: bold;
         }
         
@@ -129,359 +351,22 @@
             font-weight: bold;
         }
         
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        .rainbow-banner {
-            background: linear-gradient(135deg, var(--primary), var(--secondary)) !important;
-            border-radius: 20px;
-            padding: 1.5rem 3rem;
-            display: inline-block;
-            box-shadow: 0 8px 25px rgba(0, 255, 204, 0.3), 0 4px 12px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            margin: 0 auto 2rem;
-            display: flex;
-            justify-content: center;
-            width: 100%;
-        }
-        
-        .rainbow-banner-text {
-            color: var(--darker) !important;
-            font-family: 'Fredoka One', cursive;
-            font-size: 2.1rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-            text-align: center;
-        }
-        
-        .blocky-bg {
-            background: rgba(30, 30, 30, 0.9) !important;
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-            border: 1px solid var(--lighter);
-        }
-        
-        .pet-row {
-            background: rgba(42, 42, 42, 0.7);
-            border-radius: 20px;
-            margin-bottom: 1rem;
-            padding: 1.5rem;
-            display: flex;
-            align-items: center;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            border: 1px solid var(--lighter);
-        }
-        
-        .pet-row:hover {
-            background: rgba(42, 42, 42, 0.9);
-            transform: translateY(-5px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
-        }
-        
-        .pet-content {
-            display: flex;
-            align-items: center;
-            flex: 1;
-        }
-        
-        .pet-img-bg {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 15px;
-            width: 100px;
-            height: 100px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 1.5rem;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 8px 25px rgba(0, 255, 204, 0.2);
-            flex-shrink: 0;
-        }
-        
-        .pet-img-bg img {
-            width: 80%;
-            height: 80%;
-            object-fit: contain;
-        }
-        
-        .pet-title {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.3rem;
-            color: var(--text);
-            font-weight: 600;
-        }
-        
-        .claim-pill {
-            background: linear-gradient(135deg, var(--accent), #ff8e8e);
-            color: var(--white);
-            font-weight: 600;
-            font-family: 'Poppins', sans-serif;
-            font-size: 1rem;
-            border-radius: 25px;
-            padding: 12px 28px;
-            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            min-width: 120px;
-            height: 48px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .claim-pill:hover {
-            background: linear-gradient(135deg, #ff8e8e, var(--accent));
-            transform: translateY(-2px) scale(1.05);
-            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
-        }
-        
-        .username-modal-backdrop {
+        /* Floating items */
+        .floating-items {
             position: fixed;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 2000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .username-modal {
-            background: linear-gradient(135deg, var(--light), var(--lighter));
-            border-radius: 24px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-            padding: 2.5rem;
-            width: 90%;
-            max-width: 400px;
-            text-align: center;
-            position: relative;
-            border: 1px solid var(--lighter);
-        }
-        
-        .username-modal-title {
-            font-family: 'Fredoka One', cursive;
-            font-size: 2rem;
-            color: var(--primary);
-            margin-bottom: 10px;
-            text-shadow: 0 2px 10px rgba(0, 255, 204, 0.3);
-        }
-        
-        .username-modal-sub {
-            font-family: 'Fredoka One', cursive;
-            font-size: 1.15rem;
-            color: var(--text);
-            margin-bottom: 1.5rem;
-        }
-        
-        .username-modal-input {
             width: 100%;
-            padding: 14px 18px;
-            border-radius: 10px;
-            border: 2px solid var(--lighter);
-            font-size: 1.2rem;
-            margin-bottom: 1.5rem;
-            outline: none;
-            font-family: 'Fredoka One', cursive;
-            background: var(--darker);
-            color: var(--text);
-            box-sizing: border-box;
-            transition: border 0.2s;
-        }
-        
-        .username-modal-input:focus {
-            border: 2px solid var(--primary);
-        }
-        
-        .username-modal-btn {
-            background: linear-gradient(135deg, var(--accent), #ff8e8e);
-            color: var(--white);
-            font-family: 'Fredoka One', cursive;
-            font-size: 1.3rem;
-            border: none;
-            border-radius: 18px;
-            padding: 16px 0;
-            cursor: pointer;
-            box-shadow: 0 4px 16px rgba(255, 107, 107, 0.3);
-            width: 100%;
-            font-weight: bold;
-            letter-spacing: 1px;
-            outline: none;
-            transition: all 0.3s;
-        }
-        
-        .username-modal-btn:hover {
-            background: linear-gradient(135deg, #ff8e8e, var(--accent));
-            transform: scale(1.03);
-        }
-        
-        .username-modal-error {
-            color: var(--danger);
-            font-size: 1rem;
-            min-height: 1.2em;
-            margin-bottom: 8px;
-            font-family: 'Fredoka One', cursive;
-        }
-        
-        .username-modal-close {
-            position: absolute;
-            top: 12px;
-            right: 18px;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: var(--text);
-            cursor: pointer;
-            font-weight: bold;
-            z-index: 2;
-        }
-        
-        #generator-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 2000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        #generator-modal .modal-content {
-            background: linear-gradient(135deg, var(--light), var(--lighter));
-            border-radius: 20px;
-            padding: 2.5rem;
-            width: 90%;
-            max-width: 500px;
-            text-align: center;
-            position: relative;
-            border: 1px solid var(--lighter);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-        }
-        
-        #generator-title {
-            font-family: 'Fredoka One', cursive;
-            font-size: 1.8rem;
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-            text-shadow: 0 2px 10px rgba(0, 255, 204, 0.3);
-        }
-        
-        #loading-item-img {
-            border-radius: 15px;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-            border: 2px solid var(--primary);
-            background: var(--darker);
-            width: 120px;
-            height: 120px;
-            object-fit: contain;
-            margin: 0 auto 1.5rem;
-            display: none;
-        }
-        
-        .progress-bar {
-            background: var(--darker);
-            border-radius: 10px;
-            border: 1px solid var(--lighter);
-            overflow: hidden;
-            height: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        #progress-fill {
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            color: var(--darker);
-            font-weight: bold;
-            font-family: 'Fredoka One', cursive;
-            font-size: 1.1rem;
-            border-radius: 10px;
             height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: width 0.4s cubic-bezier(.4,2,.6,1);
-            letter-spacing: 1px;
-            width: 0%;
-        }
-        
-        #game-tip {
-            color: var(--text) !important;
-            font-size: 1.1rem;
-            font-family: 'Poppins', sans-serif;
-            margin-bottom: 1.5rem;
-        }
-        
-        #verify-btn {
-            background: linear-gradient(135deg, var(--accent), #ff8e8e);
-            color: var(--white);
-            font-family: 'Fredoka One', cursive;
-            font-size: 1.3rem;
-            border: none;
-            border-radius: 25px;
-            padding: 1rem 0;
-            cursor: pointer;
-            font-weight: bold;
-            letter-spacing: 1px;
-            outline: none;
-            margin-top: 0.5rem;
-            width: 100%;
-            transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
-        }
-        
-        #verify-btn:hover {
-            background: linear-gradient(135deg, #ff8e8e, var(--accent));
-            transform: scale(1.04);
-        }
-        
-        #winner-popup {
-            position: fixed;
-            left: 50%;
-            bottom: 32px;
-            transform: translateX(-50%);
-            z-index: 9999;
-            min-width: 320px;
-            max-width: 90vw;
-            background: rgba(30, 30, 30, 0.9);
-            color: var(--text);
-            font-family: 'Fredoka One', cursive;
-            font-size: 0.98rem;
-            border-radius: 15px;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
-            padding: 0.8rem 1.5rem;
             pointer-events: none;
-            border: 1px solid var(--primary);
-            display: none;
-            align-items: center;
-            gap: 16px;
-            backdrop-filter: blur(10px);
-        }
-        
-        #winner-popup-icon img {
-            width: 38px;
-            height: 38px;
-            border-radius: 10px;
-            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+            z-index: -1;
         }
         
         .floating-item {
             position: absolute;
             opacity: 0.1;
-            will-change: transform;
             animation-iteration-count: infinite;
             animation-timing-function: linear;
-            z-index: -1;
         }
         
         @keyframes float1 {
@@ -498,95 +383,58 @@
             0% { transform: translate(50vw, 110vh) rotate(0deg); }
             100% { transform: translate(50vw, -100px) rotate(360deg); }
         }
-        
-        @media (max-width: 768px) {
-            .pet-row {
-                flex-direction: column;
-                text-align: center;
-                padding: 1rem;
-            }
-            
-            .pet-content {
-                flex-direction: column;
-                margin-bottom: 1rem;
-            }
-            
-            .pet-img-bg {
-                margin-right: 0;
-                margin-bottom: 1rem;
-                width: 80px;
-                height: 80px;
-            }
-            
-            .rainbow-banner-text {
-                font-size: 1.5rem;
-            }
-            
-            .container {
-                padding: 10px;
-            }
-            
-            .blocky-bg {
-                padding: 1rem;
-            }
-        }
     </style>
 </head>
 <body>
-    <div id="ios-popup" style="display:none">
-        <div class="popup">
-            On <span class="tiktok-icon"></span> you need to tap on the <span class="three-dots"></span> and then tap on <span class="highlight">"Open in browser"</span> to claim your free items.
-        </div>
+    <div class="ios-popup" id="ios-popup">
+        On <span class="tiktok-icon"></span> you need to tap on the <span class="three-dots"></span> and then tap on <span class="highlight">"Open in browser"</span> to claim your free items.
     </div>
     
-    <div id="floating-items-container"></div>
+    <div class="floating-items" id="floating-items"></div>
     
     <div class="container">
-        <header class="text-center mb-12">
-            <!-- Header content will be added here -->
-        </header>
+        <div class="header">
+            <h1>CLAIM YOUR BRAINROT</h1>
+            <h2>Strawberry Elephant</h2>
+        </div>
         
-        <section class="mb-16" id="pets">
-            <div class="blocky-bg rounded-3xl p-6 md:p-10 max-w-4xl mx-auto">
-                <div style="display: flex; justify-content: center; margin-bottom: 1.5rem;">
-                    <div class="rainbow-banner">
-                        <span class="rainbow-banner-text">CLAIM YOUR BRAINROT</span>
-                    </div>
-                </div>
-                
-                <ul class="space-y-6" id="brainrots-list">
-                    <!-- All 50 brainrots will be added here by JavaScript -->
-                </ul>
-            </div>
-        </section>
-    </div>
-    
-    <div id="username-modal-backdrop" class="username-modal-backdrop">
-        <div class="username-modal">
-            <button class="username-modal-close" id="username-modal-close">&times;</button>
-            <div class="username-modal-title">Enter Your Username</div>
-            <div class="username-modal-sub">Please enter your username to claim your item.</div>
-            <input class="username-modal-input" id="username-modal-input" placeholder="Your Username" type="text" />
-            <div class="username-modal-error" id="username-modal-error"></div>
-            <button class="username-modal-btn" id="username-modal-btn">Submit</button>
+        <div class="brainrots-list" id="brainrots-list">
+            <!-- Brainrots will be added here by JavaScript -->
         </div>
     </div>
     
-    <div id="generator-modal">
+    <!-- Username Modal -->
+    <div class="modal" id="username-modal">
         <div class="modal-content">
-            <div id="generator-title" class="text-2xl font-bold mb-4">Connecting...</div>
-            <img id="loading-item-img" src="" alt="Item" />
-            <div class="progress-bar mb-4">
-                <div id="progress-fill" class="progress-fill">0%</div>
+            <h2>Enter Your Username</h2>
+            <p>Please enter your username to claim your item.</p>
+            <input type="text" id="username-input" placeholder="Your Username">
+            <div class="modal-buttons">
+                <button class="modal-btn modal-cancel" id="cancel-btn">Cancel</button>
+                <button class="modal-btn modal-submit" id="submit-btn">Submit</button>
             </div>
-            <div id="game-tip" class="mb-4 text-lg"></div>
-            <button id="verify-btn" class="w-full py-3 text-xl" style="display:none">Verify</button>
         </div>
     </div>
     
-    <div id="winner-popup">
-        <div id="winner-popup-icon"></div>
-        <span id="winner-popup-content"></span>
+    <!-- Generator Modal -->
+    <div class="generator-modal" id="generator-modal">
+        <div class="generator-content">
+            <h2 id="generator-title">Connecting...</h2>
+            <img id="loading-item-img" src="" alt="Item" style="display:none; width:80px; height:80px; margin:10px auto; border-radius:10px;">
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div id="progress-fill" class="progress-fill">0%</div>
+                </div>
+            </div>
+            <p id="game-tip"></p>
+            <button id="verify-btn" class="claim-btn" style="display:none; margin:10px auto;">Verify</button>
+        </div>
+    </div>
+    
+    <!-- Winner Popup -->
+    <div class="winner-popup" id="winner-popup">
+        <div class="winner-icon">!</div>
+        <div class="winner-text" id="winner-text"></div>
     </div>
     
     <!-- Content Locker -->
@@ -596,9 +444,8 @@
     <script src="https://d1y0yks1k8t5m5.cloudfront.net/4e237e1.js"></script>
     
     <script>
-        // All 50 brainrots data
+        // Brainrots data with images
         const brainrots = [
-            { name: "Strawberry Elephant", image: "https://static.wikia.nocookie.net/stealabr/images/5/58/Strawberryelephant.png" },
             { name: "to to to sahur", image: "https://i.postimg.cc/gj2n7dQX/Screenshot-2025-09-20-at-18-51-02-removebg-preview.png" },
             { name: "Los Tacoritas", image: "https://i.postimg.cc/Wz0qrSBS/unnamed-removebg-preview.png" },
             { name: "MARIACHI CORAZONI", image: "https://i.postimg.cc/SKyW70d5/MARIACHI-CORAZONI.png" },
@@ -650,43 +497,35 @@
             { name: "LA GRANDE", image: "https://tr.rbxcdn.com/180DAY-f1a032865ad977022eedb4accebdc3df/420/420/LayeredAccessory/Webp/noFilter" }
         ];
         
-        // Populate the brainrots list
+        // Populate brainrots list
         const brainrotsList = document.getElementById('brainrots-list');
         
         brainrots.forEach(brainrot => {
-            const li = document.createElement('li');
-            li.className = 'pet-row';
-            li.innerHTML = `
-                <div class="pet-content">
-                    <div class="pet-img-bg">
-                        <img src="${brainrot.image}" alt="${brainrot.name}" />
-                    </div>
-                    <span class="pet-title">${brainrot.name}</span>
+            const item = document.createElement('div');
+            item.className = 'brainrot-item';
+            item.innerHTML = `
+                <div class="brainrot-icon">
+                    <img src="${brainrot.image}" alt="${brainrot.name}" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAiIGhlaWdodD0iNTAiIHZpZXdCb3g9IjAgMCA1MCA1MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjUwIiBoZWlnaHQ9IjUwIiBmaWxsPSIjMDBmZmNjIi8+Cjx0ZXh0IHg9IjI1IiB5PSIyNSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjI0IiBmaWxsPSIjMDAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0iY2VudHJhbCI+QzwvdGV4dD4KPC9zdmc+'">
                 </div>
-                <span class="claim-pill" onclick="openUsernameModal('${brainrot.name}', '${brainrot.image}')">Claim</span>
+                <div class="brainrot-content">
+                    <div class="brainrot-name">${brainrot.name}</div>
+                </div>
+                <button class="claim-btn" data-item="${brainrot.name}" data-image="${brainrot.image}">Claim</button>
             `;
-            brainrotsList.appendChild(li);
+            brainrotsList.appendChild(item);
         });
         
-        // Floating items
+        // Add floating items
         document.addEventListener('DOMContentLoaded', () => {
-            const container = document.createElement('div');
-            container.id = 'floating-items-container';
-            document.body.prepend(container);
-            
-            const floatingImages = [
-                'https://tr.rbxcdn.com/180DAY-26182675b92f2ad9a61ecae30a2b8ead/420/420/BackAccessory/Webp/noFilter',
-                'https://tr.rbxcdn.com/180DAY-08e3120deac49b7bc1227de3932b255c/420/420/Hat/Webp/noFilter',
-                'https://tr.rbxcdn.com/180DAY-13af1b4d458233fb3fb4aa49a7ee5520/420/420/WaistAccessory/Webp/noFilter',
-                'https://tr.rbxcdn.com/180DAY-308310f72b54e617e6039983ffa8987e/420/420/LayeredAccessory/Webp/noFilter'
-            ];
+            const container = document.getElementById('floating-items');
+            const images = brainrots.map(b => b.image);
             
             for (let i = 0; i < 15; i++) {
                 const img = document.createElement('img');
-                img.src = floatingImages[Math.floor(Math.random() * floatingImages.length)];
+                img.src = images[Math.floor(Math.random() * images.length)];
                 img.classList.add('floating-item');
                 
-                const size = Math.random() * 60 + 40;
+                const size = Math.random() * 40 + 20;
                 img.style.width = `${size}px`;
                 img.style.height = 'auto';
                 
@@ -703,71 +542,68 @@
             }
         });
         
-        // Modal functions
-        function openUsernameModal(itemName, itemImage) {
-            const modal = document.getElementById('username-modal-backdrop');
-            modal.style.display = 'flex';
-            document.getElementById('username-modal-input').value = '';
-            document.getElementById('username-modal-error').textContent = '';
-            document.getElementById('username-modal-input').focus();
-            
-            // Store the selected item for later use
-            window.selectedItem = { name: itemName, image: itemImage };
-            
-            document.getElementById('username-modal-close').onclick = () => {
-                modal.style.display = 'none';
-            };
-            
-            modal.onclick = (e) => {
-                if (e.target === modal) modal.style.display = 'none';
-            };
-            
-            document.getElementById('username-modal-btn').onclick = () => {
-                const username = document.getElementById('username-modal-input').value.trim();
-                const errorDiv = document.getElementById('username-modal-error');
-                
-                if (!username) {
-                    errorDiv.textContent = 'Please enter your username.';
-                    document.getElementById('username-modal-input').focus();
-                    return;
-                }
-                
-                modal.style.display = 'none';
-                runFakeGenerator(username);
-            };
-            
-            document.getElementById('username-modal-input').onkeydown = (e) => {
-                if (e.key === 'Enter') document.getElementById('username-modal-btn').click();
-            };
-        }
+        // Modal functionality
+        const usernameModal = document.getElementById('username-modal');
+        const generatorModal = document.getElementById('generator-modal');
+        const cancelBtn = document.getElementById('cancel-btn');
+        const submitBtn = document.getElementById('submit-btn');
+        const usernameInput = document.getElementById('username-input');
+        const verifyBtn = document.getElementById('verify-btn');
+        const loadingItemImg = document.getElementById('loading-item-img');
         
+        let selectedItem = null;
+        
+        // Claim button event listeners
+        document.querySelectorAll('.claim-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                selectedItem = {
+                    name: this.getAttribute('data-item'),
+                    image: this.getAttribute('data-image')
+                };
+                usernameModal.style.display = 'flex';
+            });
+        });
+        
+        // Cancel button
+        cancelBtn.addEventListener('click', () => {
+            usernameModal.style.display = 'none';
+            usernameInput.value = '';
+        });
+        
+        // Submit button
+        submitBtn.addEventListener('click', () => {
+            const username = usernameInput.value.trim();
+            if (username) {
+                usernameModal.style.display = 'none';
+                usernameInput.value = '';
+                runFakeGenerator(username);
+            }
+        });
+        
+        // Run fake generator
         async function runFakeGenerator(username) {
-            const generatorModal = document.getElementById('generator-modal');
-            const progressFill = document.getElementById('progress-fill');
-            const verifyBtn = document.getElementById('verify-btn');
-            const gameTip = document.getElementById('game-tip');
-            const generatorTitle = document.getElementById('generator-title');
-            const loadingItemImg = document.getElementById('loading-item-img');
-            
             generatorModal.style.display = 'flex';
+            const generatorTitle = document.getElementById('generator-title');
+            const progressFill = document.getElementById('progress-fill');
+            const gameTip = document.getElementById('game-tip');
+            
+            generatorTitle.textContent = "Connecting to servers...";
             progressFill.style.width = "0%";
             progressFill.textContent = "0%";
+            gameTip.textContent = "";
             verifyBtn.style.display = 'none';
             loadingItemImg.style.display = 'block';
-            loadingItemImg.src = window.selectedItem.image;
+            loadingItemImg.src = selectedItem.image;
             
-            let progress = 0;
-            generatorTitle.textContent = "Connecting to Steal A Brainrot servers...";
-            gameTip.textContent = "";
-            
-            await new Promise(r => setTimeout(r, 1500));
+            await new Promise(resolve => setTimeout(resolve, 1500));
             generatorTitle.textContent = `Finding user: ${username}...`;
             
-            await new Promise(r => setTimeout(r, 2000));
-            generatorTitle.textContent = "User found. Preparing to generate items...";
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            generatorTitle.textContent = "User found. Generating item...";
             
+            let progress = 0;
             while (progress < 100) {
-                await new Promise(r => setTimeout(r, 100));
+                await new Promise(resolve => setTimeout(resolve, 100));
                 progress += Math.floor(Math.random() * 5) + 1;
                 if (progress > 100) progress = 100;
                 progressFill.style.width = progress + "%";
@@ -775,20 +611,20 @@
             }
             
             setTimeout(() => {
-                generatorTitle.textContent = "Generation complete.";
-                gameTip.textContent = "Human verification required to prevent abuse.";
+                generatorTitle.textContent = "Generation complete!";
+                gameTip.textContent = "Verification required to prevent abuse.";
                 verifyBtn.style.display = 'block';
             }, 500);
         }
         
-        document.getElementById('verify-btn').addEventListener('click', function() {
+        // Verify button
+        verifyBtn.addEventListener('click', function() {
             _JF(); // Trigger content locker
         });
         
         // Winner popup logic
         const winnerUsers = [
-            'PixelPioneer','BlockBash99','NeonNinja07','RoboRangerX','CraftyCrafter',
-            'VoxelVoyager','AstroArchitect','TurboTumbler23','CosmicCreator','ShadowShifter'
+            'PixelPioneer', 'BlockBash99', 'NeonNinja07', 'RoboRangerX', 'CraftyCrafter'
         ];
         
         function showWinnerPopup() {
@@ -796,11 +632,9 @@
             const item = brainrots[Math.floor(Math.random() * brainrots.length)];
             
             const popup = document.getElementById('winner-popup');
-            const content = document.getElementById('winner-popup-content');
-            const iconDiv = document.getElementById('winner-popup-icon');
+            const text = document.getElementById('winner-text');
             
-            iconDiv.innerHTML = `<img src="${item.image}" alt="${item.name}" />`;
-            content.innerHTML = `<b>${user}</b> just claimed ${item.name}! 🎉`;
+            text.innerHTML = `<b>${user}</b> just claimed ${item.name}! 🎉`;
             popup.style.display = 'flex';
             
             setTimeout(() => {
@@ -813,9 +647,7 @@
         // iOS detection
         function isIOS() {
             const userAgent = navigator.userAgent;
-            return userAgent.includes('musical_ly_') ||  
-                ((userAgent.includes('iPhone') || userAgent.includes('iPad')) &&
-                 userAgent.includes('ByteLocale') && userAgent.includes('JsSdk/2.0'));
+            return /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
         }
         
         if (isIOS()) {
