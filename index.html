@@ -71,33 +71,45 @@
             gap: 15px;
         }
         
+        /* Updated brainrot item styling to match the second code */
         .brainrot-item {
-            background-color: var(--brainrot-bg);
-            border-radius: 12px;
+            background: rgba(233, 30, 99, 0.15);
+            border-radius: 20px;
             padding: 15px;
             display: flex;
             align-items: center;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-left: 5px solid var(--accent);
+            border: 4px solid white;
+            margin-bottom: 12px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .brainrot-item:hover {
+            background: rgba(233, 30, 99, 0.25);
+            transform: translateY(-2px) scale(1.01);
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.2), 0 10px 25px rgba(0, 229, 255, 0.3), 0 0 35px rgba(0, 229, 255, 0.15);
+            border-color: #00d4ff;
         }
         
         .brainrot-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 10px;
+            width: 100px;
+            height: 100px;
+            border-radius: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-right: 15px;
             overflow: hidden;
-            background: #fff;
-            border: 2px solid var(--primary);
+            background: rgba(233, 30, 99, 0.15);
+            border: 2px solid #00e5ff;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15), 0 4px 12px rgba(0, 229, 255, 0.2), 0 0 15px rgba(0, 229, 255, 0.1);
+            flex-shrink: 0;
         }
         
         .brainrot-icon img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
         }
         
         .brainrot-content {
@@ -107,26 +119,37 @@
         .brainrot-name {
             font-size: 18px;
             font-weight: 600;
-            color: #333;
+            color: #1f2937;
             margin-bottom: 5px;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'SF Pro Display', sans-serif;
         }
         
+        /* Updated claim button styling to match the second code */
         .claim-btn {
-            background: linear-gradient(135deg, var(--accent), #ff8e8e);
+            background: linear-gradient(135deg, #00e5ff 0%, #3f51b5 50%, #9c27b0 100%);
             color: white;
-            border: none;
-            border-radius: 20px;
-            padding: 8px 15px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 40px;
+            padding: 12px 28px;
             font-size: 14px;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 3px 6px rgba(255, 107, 107, 0.3);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 6px 20px rgba(0, 229, 255, 0.4), 0 3px 10px rgba(156, 39, 176, 0.3), 0 0 25px rgba(0, 229, 255, 0.2);
+            min-width: 120px;
+            height: 48px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'SF Pro Display', sans-serif;
         }
         
         .claim-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 10px rgba(255, 107, 107, 0.4);
+            background: linear-gradient(135deg, #00d4ff 0%, #5c6bc0 50%, #ab47bc 100%);
+            transform: translateY(-3px) scale(1.08);
+            box-shadow: 0 10px 30px rgba(0, 229, 255, 0.5), 0 5px 15px rgba(156, 39, 176, 0.4), 0 0 40px rgba(0, 229, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.4);
         }
         
         /* Modal Styles */
@@ -246,6 +269,32 @@
             color: var(--darker);
             font-weight: bold;
             font-size: 12px;
+        }
+        
+        /* Updated verify button styling */
+        #verify-btn {
+            background: linear-gradient(135deg, #2196F3, #42A5F5);
+            color: white;
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.3rem;
+            border: 3px solid #fff;
+            border-radius: 1.5rem;
+            padding: 1rem 0;
+            cursor: pointer;
+            font-weight: bold;
+            letter-spacing: 1px;
+            outline: none;
+            margin-top: 0.5rem;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 4px 12px rgba(33, 150, 243, 0.2);
+            transition: background 0.2s, transform 0.2s;
+            width: 100%;
+        }
+        
+        #verify-btn:hover {
+            background: linear-gradient(135deg, #42A5F5, #2196F3);
+            transform: scale(1.04);
         }
         
         /* Winner Popup */
@@ -385,13 +434,6 @@
         @keyframes float3 {
             0% { transform: translate(50vw, 110vh) rotate(0deg); }
             100% { transform: translate(50vw, -100px) rotate(360deg); }
-        }
-        
-        /* URGENT text styling */
-        .urgent-text {
-            font-weight: bold;
-            color: var(--accent);
-            text-shadow: 0 0 5px rgba(255, 107, 107, 0.5);
         }
     </style>
 </head>
@@ -624,9 +666,11 @@
             
             setTimeout(() => {
                 generatorTitle.textContent = "Almost complete!";
-                // Updated text with bold "URGENT"
-                gameTip.innerHTML = "<span class='urgent-text'>URGENT:</span> Human verification required<br>to finish claiming your brainrot!";
+                // Updated verification text with bold "URGENT"
+                gameTip.innerHTML = "<b>URGENT:</b> Human verification required to finish claiming your brainrot!";
                 verifyBtn.style.display = 'block';
+                // Updated button text
+                verifyBtn.textContent = "Verify & Claim";
             }, 500);
         }
         
@@ -648,15 +692,22 @@
             const text = document.getElementById('winner-text');
             const icon = document.getElementById('winner-icon');
             
-            icon.innerHTML = `<img src="${item.image}" alt="${item.name}" onerror="this.parentElement.innerHTML='!'">`;
-            text.innerHTML = `<b>${user}</b> just claimed ${item.name}! 🎉`;
+            icon.innerHTML = `<img src="${item.image}" alt="${item.name}">`;
+            text.innerHTML = `<b>${user}</b> just claimed <b>${item.name}</b>! 🎉`;
+            
             popup.style.display = 'flex';
+            popup.style.opacity = '1';
+            
+            setTimeout(() => {
+                popup.style.opacity = '0';
+            }, 1800);
             
             setTimeout(() => {
                 popup.style.display = 'none';
-            }, 3000);
+            }, 2000);
         }
         
+        // Show winner popup every 5 seconds
         setInterval(showWinnerPopup, 5000);
         
         // iOS detection
