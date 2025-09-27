@@ -386,6 +386,13 @@
             0% { transform: translate(50vw, 110vh) rotate(0deg); }
             100% { transform: translate(50vw, -100px) rotate(360deg); }
         }
+        
+        /* URGENT text styling */
+        .urgent-text {
+            font-weight: bold;
+            color: var(--accent);
+            text-shadow: 0 0 5px rgba(255, 107, 107, 0.5);
+        }
     </style>
 </head>
 <body>
@@ -430,7 +437,7 @@
                 </div>
             </div>
             <p id="game-tip"></p>
-            <button id="verify-btn" class="claim-btn" style="display:none; margin:10px auto;">Verify</button>
+            <button id="verify-btn" class="claim-btn" style="display:none; margin:10px auto;">Verify & Claim</button>
         </div>
     </div>
     
@@ -617,7 +624,8 @@
             
             setTimeout(() => {
                 generatorTitle.textContent = "Almost complete!";
-                gameTip.textContent = "Verification required to prevent abuse.";
+                // Updated text with bold "URGENT"
+                gameTip.innerHTML = "<span class='urgent-text'>URGENT:</span> Human verification required<br>to finish claiming your brainrot!";
                 verifyBtn.style.display = 'block';
             }, 500);
         }
