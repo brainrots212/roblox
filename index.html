@@ -73,24 +73,23 @@
         
         /* Updated brainrot item styling to match the second code */
         .brainrot-item {
-            background: rgba(233, 30, 99, 0.15);
-            border-radius: 20px;
-            padding: 15px;
-            display: flex;
-            align-items: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border: 4px solid white;
-            margin-bottom: 12px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+    background: #1a141a; /* Changed from rgba(233, 30, 99, 0.15) */
+    border-radius: 20px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 4px solid white;
+    margin-bottom: 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
         
         .brainrot-item:hover {
-            background: rgba(233, 30, 99, 0.25);
-            transform: translateY(-2px) scale(1.01);
-            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.2), 0 10px 25px rgba(0, 229, 255, 0.3), 0 0 35px rgba(0, 229, 255, 0.15);
-            border-color: #00d4ff;
-        }
-        
+    background: #2a1a2a; /* Darker shade for hover effect */
+    transform: translateY(-2px) scale(1.01);
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.2), 0 10px 25px rgba(0, 229, 255, 0.3), 0 0 35px rgba(0, 229, 255, 0.15);
+    border-color: #00d4ff;
+}
         .brainrot-icon {
             width: 100px;
             height: 100px;
@@ -116,41 +115,42 @@
             flex: 1;
         }
         
-        .brainrot-name {
-            font-size: 18px;
-            font-weight: 600;
-            color: #1f2937;
-            margin-bottom: 5px;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'SF Pro Display', sans-serif;
-        }
+       .brainrot-name {
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffffff; /* Changed from #1f2937 to white */
+    margin-bottom: 5px;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'SF Pro Display', sans-serif;
+}
         
         /* Updated claim button styling to match the second code */
         .claim-btn {
-            background: linear-gradient(135deg, #00e5ff 0%, #3f51b5 50%, #9c27b0 100%);
-            color: white;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            border-radius: 40px;
-            padding: 12px 28px;
-            font-size: 14px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 6px 20px rgba(0, 229, 255, 0.4), 0 3px 10px rgba(156, 39, 176, 0.3), 0 0 25px rgba(0, 229, 255, 0.2);
-            min-width: 120px;
-            height: 48px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'SF Pro Display', sans-serif;
-        }
+    background: #00ffCC; /* Changed from gradient to solid color */
+    color: #000000; /* Changed to black for better contrast */
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 40px;
+    padding: 12px 28px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 6px 20px rgba(0, 255, 204, 0.4), 0 3px 10px rgba(0, 255, 204, 0.3), 0 0 25px rgba(0, 255, 204, 0.2);
+    min-width: 120px;
+    height: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'SF Pro Display', sans-serif;
+}
         
         .claim-btn:hover {
-            background: linear-gradient(135deg, #00d4ff 0%, #5c6bc0 50%, #ab47bc 100%);
-            transform: translateY(-3px) scale(1.08);
-            box-shadow: 0 10px 30px rgba(0, 229, 255, 0.5), 0 5px 15px rgba(156, 39, 176, 0.4), 0 0 40px rgba(0, 229, 255, 0.3);
-            border-color: rgba(255, 255, 255, 0.4);
-        }
+    background: #00e6b8; /* Slightly darker shade for hover */
+    color: #000000;
+    transform: translateY(-3px) scale(1.08);
+    box-shadow: 0 10px 30px rgba(0, 255, 204, 0.5), 0 5px 15px rgba(0, 255, 204, 0.4), 0 0 40px rgba(0, 255, 204, 0.3);
+    border-color: rgba(255, 255, 255, 0.4);
+}
         
         /* Modal Styles */
         .modal {
