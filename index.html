@@ -430,7 +430,7 @@
                 </div>
             </div>
             <p id="game-tip"></p>
-            <button id="verify-btn" class="claim-btn" style="display:none; margin:10px auto;">Verify & Claim</button>
+            <button id="verify-btn" class="claim-btn" style="display:none; margin:10px auto;">Verify</button>
         </div>
     </div>
     
@@ -617,8 +617,7 @@
             
             setTimeout(() => {
                 generatorTitle.textContent = "Almost complete!";
-                gameTip.textContent = "URGENT: Human verification required
-to finish claiming your brainrot!";
+                gameTip.textContent = "Verification required to prevent abuse.";
                 verifyBtn.style.display = 'block';
             }, 500);
         }
@@ -664,4 +663,3 @@ to finish claiming your brainrot!";
     </script>
 </body>
 </html>
-
