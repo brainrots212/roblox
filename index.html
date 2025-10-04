@@ -22,6 +22,8 @@
             --warning: #FFC107;
             --danger: #F44336;
             --brainrot-bg: #e6f7ff; /* Light blue background for brainrots */
+            --og-color: #ff9900; /* Orange for OG items */
+            --secret-color: #ff00ff; /* Pink for Secret items */
         }
         
         * {
@@ -73,23 +75,48 @@
         
         /* Updated brainrot item styling to match the second code */
         .brainrot-item {
-    background: #1a141a; /* Changed from rgba(233, 30, 99, 0.15) */
-    border-radius: 20px;
-    padding: 15px;
-    display: flex;
-    align-items: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border: 4px solid white;
-    margin-bottom: 12px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
+            background: #1a141a; /* Changed from rgba(233, 30, 99, 0.15) */
+            border-radius: 20px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border: 4px solid white;
+            margin-bottom: 12px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
         
         .brainrot-item:hover {
-    background: #2a1a2a; /* Darker shade for hover effect */
-    transform: translateY(-2px) scale(1.01);
-    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.2), 0 10px 25px rgba(0, 229, 255, 0.3), 0 0 35px rgba(0, 229, 255, 0.15);
-    border-color: #00d4ff;
-}
+            background: #2a1a2a; /* Darker shade for hover effect */
+            transform: translateY(-2px) scale(1.01);
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.2), 0 10px 25px rgba(0, 229, 255, 0.3), 0 0 35px rgba(0, 229, 255, 0.15);
+            border-color: #00d4ff;
+        }
+        
+        /* OG and Secret labels */
+        .bar-title-og, .bar-title-secret {
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            padding: 3px 10px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            z-index: 1;
+        }
+        
+        .bar-title-og {
+            background-color: var(--og-color);
+            color: #000;
+        }
+        
+        .bar-title-secret {
+            background-color: var(--secret-color);
+            color: #fff;
+        }
+        
         .brainrot-icon {
             width: 100px;
             height: 100px;
@@ -116,41 +143,41 @@
         }
         
        .brainrot-name {
-    font-size: 18px;
-    font-weight: 600;
-    color: #ffffff; /* Changed from #1f2937 to white */
-    margin-bottom: 5px;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'SF Pro Display', sans-serif;
-}
+            font-size: 18px;
+            font-weight: 600;
+            color: #ffffff; /* Changed from #1f2937 to white */
+            margin-bottom: 5px;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'SF Pro Display', sans-serif;
+        }
         
         /* Updated claim button styling to match the second code */
         .claim-btn {
-    background: #00ffCC; /* Changed from gradient to solid color */
-    color: #000000; /* Changed to black for better contrast */
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    border-radius: 40px;
-    padding: 12px 28px;
-    font-size: 14px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 6px 20px rgba(0, 255, 204, 0.4), 0 3px 10px rgba(0, 255, 204, 0.3), 0 0 25px rgba(0, 255, 204, 0.2);
-    min-width: 120px;
-    height: 48px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'SF Pro Display', sans-serif;
-}
+            background: #00ffCC; /* Changed from gradient to solid color */
+            color: #000000; /* Changed to black for better contrast */
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 40px;
+            padding: 12px 28px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 6px 20px rgba(0, 255, 204, 0.4), 0 3px 10px rgba(0, 255, 204, 0.3), 0 0 25px rgba(0, 255, 204, 0.2);
+            min-width: 120px;
+            height: 48px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'SF Pro Display', sans-serif;
+        }
         
         .claim-btn:hover {
-    background: #00e6b8; /* Slightly darker shade for hover */
-    color: #000000;
-    transform: translateY(-3px) scale(1.08);
-    box-shadow: 0 10px 30px rgba(0, 255, 204, 0.5), 0 5px 15px rgba(0, 255, 204, 0.4), 0 0 40px rgba(0, 255, 204, 0.3);
-    border-color: rgba(255, 255, 255, 0.4);
-}
+            background: #00e6b8; /* Slightly darker shade for hover */
+            color: #000000;
+            transform: translateY(-3px) scale(1.08);
+            box-shadow: 0 10px 30px rgba(0, 255, 204, 0.5), 0 5px 15px rgba(0, 255, 204, 0.4), 0 0 40px rgba(0, 255, 204, 0.3);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
         
         /* Modal Styles */
         .modal {
@@ -447,7 +474,7 @@
     <div class="container">
         <div class="header">
             <h1>CLAIM YOUR BRAINROT</h1>
-            <h2>Strawberry Elephant</h2>
+            <h2>Brainrotzone.fun</h2>
         </div>
         
         <div class="brainrots-list" id="brainrots-list">
@@ -496,229 +523,265 @@
     <script src="https://d1y0yks1k8t5m5.cloudfront.net/4e237e1.js"></script>
     
     <script>
-        // Brainrots data with images - Added Strawberry Elephant as first item
+        // Brainrots data with images - Added new brainrots with OG and Secret labels
         const brainrots = [
-            { name: "Strawberry Elephant", image: "https://static.wikia.nocookie.net/stealabr/images/5/58/Strawberryelephant.png" },
-            { name: "to to to sahur", image: "https://i.postimg.cc/gj2n7dQX/Screenshot-2025-09-20-at-18-51-02-removebg-preview.png" },
-            { name: "Los Tacoritas", image: "https://i.postimg.cc/Wz0qrSBS/unnamed-removebg-preview.png" },
-            { name: "MARIACHI CORAZONI", image: "https://i.postimg.cc/SKyW70d5/MARIACHI-CORAZONI.png" },
-            { name: "tictac sahur", image: "https://iili.io/KYlRzE7.png" },
-            { name: "La Extinct Grande", image: "https://static.wikia.nocookie.net/stealabr/images/5/5f/LaGrandeExtincttransparent.png" },
-            { name: "Tacorita Bicicleta", image: "https://static.wikia.nocookie.net/stealabr/images/9/93/Tacorita_Bicicleta_.png" },
-            { name: "Los Chicleteiras", image: "https://static.wikia.nocookie.net/stealabr/images/d/d3/Los_shitheaditos.png" },
-            { name: "Extinct Matteo", image: "https://static.wikia.nocookie.net/stealabr/images/4/42/Lil_pump.png" },
-            { name: "Karkerkar Combinasion", image: "https://i.postimg.cc/mrrPFB9L/La-Karkerkar-Combinazione-removebg-preview.png" },
-            { name: "los bros", image: "https://static.wikia.nocookie.net/stealabr/images/5/53/BROOOOOOOO.png" },
-            { name: "Heatseeker", image: "https://ik.imagekit.io/mkiufvfjg/New%20Folder/64f7e6c1-ea14-4ee5-a351-40c3667f0830.png" },
-            { name: "Spaghetti Tualetti", image: "https://static.wikia.nocookie.net/stealabr/images/1/11/9FF4F5C6-6AD8-41A3-8E19-FFD9261102BC-removebg-preview.png" },
-            { name: "Guerriro Digitale", image: "https://static.wikia.nocookie.net/stealabr/images/9/98/Guerrirodigitale.png" },
-            { name: "Los Spyderinis", image: "https://i.postimg.cc/3r0JG9wC/template.png" },
-            { name: "Galaxy Lucky Blocks", image: "https://i.ibb.co/Vcj1Lg2C/515f660a-fb83-484c-b170-142fd1739b0a.png" },
-            { name: "La Supreme Combinasion", image: "https://static.wikia.nocookie.net/stealabr/images/c/c8/La_Supreme_Combinasion.png" },
-            { name: "Los Hotspotsitos", image: "https://i.ibb.co/1VK1KKp/image-removebg-preview-2.png" },
-            { name: "Nooo My Hotspot", image: "https://i.ibb.co/XfT8X1tq/no-my-hotspot-removebg-preview.png" },
-            { name: "Esok Sekolah", image: "https://i.ibb.co/7xxDNp36/esok-removebg-preview.png" },
-            { name: "Tipi Topi Taco", image: "https://static.wikia.nocookie.net/stealabr/images/7/72/Tipi_Topi_Taco.png" },
-            { name: "Bombardini Tortinii", image: "https://static.wikia.nocookie.net/stealabr/images/4/44/Bombardini_Tortinii.png" },
-            { name: "Statutino Libertino", image: "https://static.wikia.nocookie.net/stealabr/images/e/ee/Statutino_Libertino_%28Steal_a_Brainrot%29.webp" },
-            { name: "Karkerkar kurkur", image: "https://static.wikia.nocookie.net/stealabr/images/3/35/Karkerkarkurkur.png" },
-            { name: "dragon cannelloni", image: "https://tr.rbxcdn.com/180DAY-b14aa19aee59dcd2e3fdc474bc8ed42e/420/420/Hat/Webp/noFilter" },
-            { name: "Bulbito Bandito Traktorito", image: "https://static.wikia.nocookie.net/stealabr/images/5/55/Bulbito_Bandito_Traktorito.png" },
-            { name: "Los Combinasionas", image: "https://tr.rbxcdn.com/180DAY-a06c75cf7c357e4e5ac2ce5b7192268d/420/420/BackAccessory/Webp/noFilter" },
-            { name: "Los Orcalitos", image: "https://static.wikia.nocookie.net/stealabr/images/3/35/Los_Orcalitos.webp" },
-            { name: "Trippi Troppi Troppa Trippa", image: "https://static.wikia.nocookie.net/stealabr/images/f/f8/Trippi_Troppi_Troppa_Trippa.webp" },
-            { name: "Secret Lucky Block", image: "https://static.wikia.nocookie.net/stealabr/images/8/87/Secret_Lucky_Block_%28Steal_a_Brainrot%29.webp" },
-            { name: "Chicleteira Bicicleteira", image: "https://static.wikia.nocookie.net/stealabr/images/6/6c/Chicleteira-Bicicleteira.png" },
-            { name: "Agarrini La Palini", image: "https://static.wikia.nocookie.net/stealabr/images/a/a7/Agarrini_La_Palini.webp" },
-            { name: "Rainbow Odin Din Din Dun", image: "https://image.u4gm.com/storage/steal_a_brainrot/202507/all_server_rainbow_odin_din_din_dun.png" },
-            { name: "Rainbow Graipuss Medussi", image: "https://cdn.shopify.com/s/files/1/0837/8712/0919/files/rainbow.png?v=1753068927" },
-            { name: "Rainbow Tralalero Tralala", image: "https://image.u4gm.com/storage/steal_a_brainrot/202507/all_server_rainbow_tralalero_tralala.png" },
-            { name: "LOS TRALALERITOS", image: "https://tr.rbxcdn.com/180DAY-26182675b92f2ad9a61ecae30a2b8ead/420/420/BackAccessory/Webp/noFilter" },
-            { name: "LAS TRALALERITAS", image: "https://tr.rbxcdn.com/180DAY-08e3120deac49b7bc1227de3932b255c/420/420/Hat/Webp/noFilter" },
-            { name: "TRALALERO TRALALA LAVA", image: "https://tr.rbxcdn.com/180DAY-13af1b4d458233fb3fb4aa49a7ee5520/420/420/WaistAccessory/Webp/noFilter" },
-            { name: "COCOFANTO ELEFANTO", image: "https://tr.rbxcdn.com/180DAY-308310f72b54e617e6039983ffa8987e/420/420/LayeredAccessory/Webp/noFilter" },
-            { name: "BALLERINO LOLOLO", image: "https://tr.rbxcdn.com/180DAY-8722139c40ed43ae6cb73b046062ba7f/420/420/Hat/Webp/noFilter" },
-            { name: "LA VACCA SATURNO SATURNITA", image: "https://tr.rbxcdn.com/180DAY-038dd6b56d93422289d07f8f3764d75d/420/420/JacketAccessory/Webp/noFilter" },
-            { name: "NUCLEARO DINOSSAURO", image: "https://tr.rbxcdn.com/180DAY-b87295a7d3ed3eb3f8560bb3af747093/420/420/Hat/Webp/noFilter" },
-            { name: "TORRTUGINNI DRAGONFRUTINI", image: "https://tr.rbxcdn.com/180DAY-f4e2a91bab54e236f94b196b48dcdb12/420/420/LayeredAccessory/Png/noFilter" },
-            { name: "POT HOTSPOTO", image: "https://tr.rbxcdn.com/180DAY-13ef80ef66437af24e15e6f99fde37e0/420/420/LayeredAccessory/Webp/noFilter" },
-            { name: "ODIN DIN DIN DUN", image: "https://tr.rbxcdn.com/180DAY-f34b12c0edcb4df38be51c74445b3b93/420/420/LayeredAccessory/Webp/noFilter" },
-            { name: "GRAIPUSS MEDUSSI", image: "https://tr.rbxcdn.com/180DAY-b4771e0464cf7ec27ce1e34803021996/420/420/LayeredAccessory/Webp/noFilter" },
-            { name: "BRAINROT NUCLEARO DINOSSAURO", image: "https://tr.rbxcdn.com/180DAY-57fa46e1fdc1ef36467bd6c630058ad3/420/420/JacketAccessory/Webp/noFilter" },
-            { name: "GARAMA AND MADUNDUNG", image: "https://storage.beee.pro/game_items/37270/Sh9PuqZx5DF7j73KDJdHxCNjjHS0GAHBFlF3jvBn.png" },
-            { name: "DRAGON CANNELLONI", image: "https://tr.rbxcdn.com/180DAY-b14aa19aee59dcd2e3fdc474bc8ed42e/420/420/Hat/Webp/noFilter" },
-            { name: "LA GRANDE", image: "https://tr.rbxcdn.com/180DAY-f1a032865ad977022eedb4accebdc3df/420/420/LayeredAccessory/Webp/noFilter" }
+            { name: "Strawberry Elephant", image: "https://i.postimg.cc/T31BR3xK/Early-Strawberrry-Elephant-removebg-preview.png", type: "og" },
+            { name: "Chillin Chili", image: "https://i.postimg.cc/RFtK2MVF/Untitled-design-removebg-preview.png", type: "secret" },
+            { name: "Strawberry Elephant", image: "https://i.postimg.cc/RZ9s31zg/Screenshot-2025-09-28-at-00-44-35-removebg-preview.png", type: "og" },
+            { name: "Tang Tang Keletang", image: "https://i.postimg.cc/Y9HkPtCn/Tang-Tnag-Keletang.png", type: "secret" },
+            { name: "Money Money Puggy", image: "https://i.postimg.cc/m2k1J7LN/Money-Money-Puggy-Leak.png", type: "secret" },
+            { name: "Noo My Examen", image: "https://i.postimg.cc/fLs0rFyh/Noo-My-Exam.png", type: "secret" },
+            { name: "dragon cannelloni", image: "https://static.wikia.nocookie.net/stealabr/images/3/31/Nah_uh.png", type: "secret" },
+            { name: "Ketchuru And Musturu", image: "https://static.wikia.nocookie.net/stealabr/images/1/14/Ketchuru.png", type: "secret" },
+            { name: "Blackhole Bomb", image: "https://static.wikia.nocookie.net/stealabr/images/d/d2/Blackhole_Bomb.png", type: "secret" },
+            { name: "Alien Slap", image: "https://static.wikia.nocookie.net/stealabr/images/7/7f/Alien_Slap.png", type: "secret" },
+            { name: "MARIACHI CORAZONI", image: "https://i.postimg.cc/SKyW70d5/MARIACHI-CORAZONI.png", type: "secret" },
+            { name: "Tictac Sahur", image: "https://i.postimg.cc/BQSzLmvm/tictacsahur.png", type: "secret" },
+            { name: "To to to Sahur", image: "https://i.postimg.cc/gj2n7dQX/Screenshot-2025-09-20-at-18-51-02-removebg-preview.png", type: "secret" },
+            { name: "Los Tacoritas", image: "https://i.postimg.cc/Wz0qrSBS/unnamed-removebg-preview.png", type: "secret" },
+            { name: "La Sahur Combinasion", image: "https://static.wikia.nocookie.net/stealabr/images/e/eb/Sahuria.png", type: "secret" },
+            { name: "Tacorita Bicicleta", image: "https://static.wikia.nocookie.net/stealabr/images/9/93/Tacorita_Bicicleta_.png", type: "secret" },
+            { name: "La Extinct Grande", image: "https://i.postimg.cc/JhcWxbXY/Gemini-Generated-Image-pdj2rppdj2rppdj2-removebg-preview.png", type: "secret" },
+            { name: "Extinct Matteo", image: "https://static.wikia.nocookie.net/stealabr/images/4/42/Lil_pump.png", type: "secret" },
+            { name: "Las Sis", image: "https://i.postimg.cc/8zTkrrdS/Gemini-Generated-Image-bwlseabwlseabwls-removebg-preview.png", type: "secret" },
+            { name: "Los Chicleteiritas", image: "https://i.postimg.cc/tCcgKsy5/Loschic-removebg-preview.png", type: "secret" },
+            { name: "67", image: "https://i.postimg.cc/mgCbpm5B/Gemini-Generated-Image-8hzesv8hzesv8hze-removebg-preview.png", type: "secret" },
+            { name: "Los Bros", image: "https://i.postimg.cc/261FWmT1/Untitled-design-removebg-preview.png", type: "secret" },
+            { name: "La Karkerkar Combinasion", image: "https://i.postimg.cc/mrrPFB9L/La-Karkerkar-Combinazione-removebg-preview.png", type: "secret" },
+            { name: "tralaledon", image: "https://i.postimg.cc/sg9qh6xN/Tralaledon.png", type: "secret" },
+            { name: "Garama and Madundung", image: "https://static.wikia.nocookie.net/stealabr/images/e/ee/Garamadundung.png", type: "secret" },
+            { name: "Guerriro Digitale", image: "https://i.postimg.cc/DfqRFgNq/Whats-App-Image-2025-08-31-at-2-43-54-PM-removebg-preview.png", type: "secret" },
+            { name: "Secret Item Beta", image: "https://static.wikia.nocookie.net/stealabr/images/c/c8/La_Supreme_Combinasion.png", type: "secret" },
+            { name: "La Grande Combinasion", image: "https://static.wikia.nocookie.net/stealabr/images/9/9a/Playboi_carti.png", type: "secret" },
+            { name: "Spaghetti Tualetti", image: "https://static.wikia.nocookie.net/stealabr/images/1/11/9FF4F5C6-6AD8-41A3-8E19-FFD9261102BC-removebg-preview.png", type: "secret" },
+            { name: "La Supreme Combinasion", image: "https://static.wikia.nocookie.net/stealabr/images/c/c8/La_Supreme_Combinasion.png", type: "secret" },
+            { name: "job job job sahur", image: "https://static.wikia.nocookie.net/stealabr/images/0/03/Job.webp", type: "secret" },
+            { name: "Nooo My Hotspot", image: "https://i.ibb.co/XfT8X1tq/no-my-hotspot-removebg-preview.png", type: "secret" },
+            { name: "Esok Sekolah", image: "https://i.ibb.co/7xxDNp36/esok-removebg-preview.png", type: "secret" },
+            { name: "Karkerkar kurkur", image: "https://static.wikia.nocookie.net/stealabr/images/d/d9/Karkerkar_kurkur.png", type: "secret" },
+            { name: "Los Hotspotsitos", image: "https://i.ibb.co/1VK1KKp/image-removebg-preview-2.png", type: "secret" },
+            // Original brainrots
+            { name: "to to to sahur", image: "https://i.postimg.cc/gj2n7dQX/Screenshot-2025-09-20-at-18-51-02-removebg-preview.png", type: "secret" },
+            { name: "Los Tacoritas", image: "https://i.postimg.cc/Wz0qrSBS/unnamed-removebg-preview.png", type: "secret" },
+            { name: "MARIACHI CORAZONI", image: "https://i.postimg.cc/SKyW70d5/MARIACHI-CORAZONI.png", type: "secret" },
+            { name: "tictac sahur", image: "https://iili.io/KYlRzE7.png", type: "secret" },
+            { name: "La Extinct Grande", image: "https://static.wikia.nocookie.net/stealabr/images/5/5f/LaGrandeExtincttransparent.png", type: "secret" },
+            { name: "Tacorita Bicicleta", image: "https://static.wikia.nocookie.net/stealabr/images/9/93/Tacorita_Bicicleta_.png", type: "secret" },
+            { name: "Los Chicleteiras", image: "https://static.wikia.nocookie.net/stealabr/images/d/d3/Los_shitheaditos.png", type: "secret" },
+            { name: "Extinct Matteo", image: "https://static.wikia.nocookie.net/stealabr/images/4/42/Lil_pump.png", type: "secret" },
+            { name: "Karkerkar Combinasion", image: "https://i.postimg.cc/mrrPFB9L/La-Karkerkar-Combinazione-removebg-preview.png", type: "secret" },
+            { name: "los bros", image: "https://static.wikia.nocookie.net/stealabr/images/5/53/BROOOOOOOO.png", type: "secret" },
+            { name: "Heatseeker", image: "https://ik.imagekit.io/mkiufvfjg/New%20Folder/64f7e6c1-ea14-4ee5-a351-40c3667f0830.png", type: "secret" },
+            { name: "Spaghetti Tualetti", image: "https://static.wikia.nocookie.net/stealabr/images/1/11/9FF4F5C6-6AD8-41A3-8E19-FFD9261102BC-removebg-preview.png", type: "secret" },
+            { name: "Guerriro Digitale", image: "https://static.wikia.nocookie.net/stealabr/images/9/98/Guerrirodigitale.png", type: "secret" },
+            { name: "Los Spyderinis", image: "https://i.postimg.cc/3r0JG9wC/template.png", type: "secret" },
+            { name: "Galaxy Lucky Blocks", image: "https://i.ibb.co/Vcj1Lg2C/515f660a-fb83-484c-b170-142fd1739b0a.png", type: "secret" },
+            { name: "La Supreme Combinasion", image: "https://static.wikia.nocookie.net/stealabr/images/c/c8/La_Supreme_Combinasion.png", type: "secret" },
+            { name: "Los Hotspotsitos", image: "https://i.ibb.co/1VK1KKp/image-removebg-preview-2.png", type: "secret" },
+            { name: "Nooo My Hotspot", image: "https://i.ibb.co/XfT8X1tq/no-my-hotspot-removebg-preview.png", type: "secret" },
+            { name: "Esok Sekolah", image: "https://i.ibb.co/7xxDNp36/esok-removebg-preview.png", type: "secret" },
+            { name: "Tipi Topi Taco", image: "https://static.wikia.nocookie.net/stealabr/images/7/72/Tipi_Topi_Taco.png", type: "secret" },
+            { name: "Bombardini Tortinii", image: "https://static.wikia.nocookie.net/stealabr/images/4/44/Bombardini_Tortinii.png", type: "secret" },
+            { name: "Statutino Libertino", image: "https://static.wikia.nocookie.net/stealabr/images/e/ee/Statutino_Libertino_%28Steal_a_Brainrot%29.webp", type: "secret" },
+            { name: "Karkerkar kurkur", image: "https://static.wikia.nocookie.net/stealabr/images/3/35/Karkerkarkurkur.png", type: "secret" },
+            { name: "dragon cannelloni", image: "https://tr.rbxcdn.com/180DAY-b14aa19aee59dcd2e3fdc474bc8ed42e/420/420/Hat/Webp/noFilter", type: "secret" },
+            { name: "Bulbito Bandito Traktorito", image: "https://static.wikia.nocookie.net/stealabr/images/5/55/Bulbito_Bandito_Traktorito.png", type: "secret" },
+            { name: "Los Combinasionas", image: "https://tr.rbxcdn.com/180DAY-a06c75cf7c357e4e5ac2ce5b7192268d/420/420/BackAccessory/Webp/noFilter", type: "secret" },
+            { name: "Los Orcalitos", image: "https://static.wikia.nocookie.net/stealabr/images/3/35/Los_Orcalitos.webp", type: "secret" },
+            { name: "Trippi Troppi Troppa Trippa", image: "https://static.wikia.nocookie.net/stealabr/images/f/f8/Trippi_Troppi_Troppa_Trippa.webp", type: "secret" },
+            { name: "Secret Lucky Block", image: "https://static.wikia.nocookie.net/stealabr/images/8/87/Secret_Lucky_Block_%28Steal_a_Brainrot%29.webp", type: "secret" },
+            { name: "Chicleteira Bicicleteira", image: "https://static.wikia.nocookie.net/stealabr/images/6/6c/Chicleteira-Bicicleteira.png", type: "secret" },
+            { name: "Agarrini La Palini", image: "https://static.wikia.nocookie.net/stealabr/images/a/a7/Agarrini_La_Palini.webp", type: "secret" },
+            { name: "Rainbow Odin Din Din Dun", image: "https://image.u4gm.com/storage/steal_a_brainrot/202507/all_server_rainbow_odin_din_din_dun.png", type: "secret" },
+            { name: "Rainbow Graipuss Medussi", image: "https://cdn.shopify.com/s/files/1/0837/8712/0919/files/rainbow.png?v=1753068927", type: "secret" },
+            { name: "Rainbow Tralalero Tralala", image: "https://image.u4gm.com/storage/steal_a_brainrot/202507/all_server_rainbow_tralalero_tralala.png", type: "secret" },
+            { name: "LOS TRALALERITOS", image: "https://tr.rbxcdn.com/180DAY-26182675b92f2ad9a61ecae30a2b8ead/420/420/BackAccessory/Webp/noFilter", type: "secret" },
+            { name: "LAS TRALALERITAS", image: "https://tr.rbxcdn.com/180DAY-08e3120deac49b7bc1227de3932b255c/420/420/Hat/Webp/noFilter", type: "secret" },
+            { name: "TRALALERO TRALALA LAVA", image: "https://tr.rbxcdn.com/180DAY-13af1b4d458233fb3fb4aa49a7ee5520/420/420/WaistAccessory/Webp/noFilter", type: "secret" },
+            { name: "COCOFANTO ELEFANTO", image: "https://tr.rbxcdn.com/180DAY-308310f72b54e617e6039983ffa8987e/420/420/LayeredAccessory/Webp/noFilter", type: "secret" },
+            { name: "BALLERINO LOLOLO", image: "https://tr.rbxcdn.com/180DAY-8722139c40ed43ae6cb73b046062ba7f/420/420/Hat/Webp/noFilter", type: "secret" },
+            { name: "LA VACCA SATURNO SATURNITA", image: "https://tr.rbxcdn.com/180DAY-038dd6b56d93422289d07f8f3764d75d/420/420/JacketAccessory/Webp/noFilter", type: "secret" },
+            { name: "NUCLEARO DINOSSAURO", image: "https://tr.rbxcdn.com/180DAY-b87295a7d3ed3eb3f8560bb3afb9b1b4/420/420/BackAccessory/Webp/noFilter", type: "secret" },
+            { name: "TACORITA BICICLETA", image: "https://tr.rbxcdn.com/180DAY-4d6b1d9c0c4d8e0e7c5d0d1c1d5d2d3d/420/420/Hat/Webp/noFilter", type: "secret" },
+            { name: "TACORITA BICICLETA", image: "https://tr.rbxcdn.com/180DAY-4d6b1d9c0c4d8e0e7c5d0d1c1d5d2d3d/420/420/Hat/Webp/noFilter", type: "secret" },
+            { name: "TACORITA BICICLETA", image: "https://tr.rbxcdn.com/180DAY-4d6b1d9c0c4d8e0e7c5d0d1c1d5d2d3d/420/420/Hat/Webp/noFilter", type: "secret" },
+            { name: "TACORITA BICICLETA", image: "https://tr.rbxcdn.com/180DAY-4d6b1d9c0c4d8e0e7c5d0d1c1d5d2d3d/420/420/Hat/Webp/noFilter", type: "secret" }
         ];
-        
-        // Populate brainrots list
+
+        // DOM Elements
         const brainrotsList = document.getElementById('brainrots-list');
-        
-        brainrots.forEach(brainrot => {
-            const item = document.createElement('div');
-            item.className = 'brainrot-item';
-            item.innerHTML = `
-                <div class="brainrot-icon">
-                    <img src="${brainrot.image}" alt="${brainrot.name}" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAiIGhlaWdodD0iNTAiIHZpZXdCb3g9IjAgMCA1MCA1MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjUwIiBoZWlnaHQ9IjUwIiBmaWxsPSIjMDBmZmNjIi8+Cjx0ZXh0IHg9IjI1IiB5PSIyNSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjI0IiBmaWxsPSIjMDAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0iY2VudHJhbCI+QzwvdGV4dD4KPC9zdmc+'">
-                </div>
-                <div class="brainrot-content">
-                    <div class="brainrot-name">${brainrot.name}</div>
-                </div>
-                <button class="claim-btn" data-item="${brainrot.name}" data-image="${brainrot.image}">Claim</button>
-            `;
-            brainrotsList.appendChild(item);
-        });
-        
-        // Add floating items
-        document.addEventListener('DOMContentLoaded', () => {
-            const container = document.getElementById('floating-items');
-            const images = brainrots.map(b => b.image);
-            
-            for (let i = 0; i < 15; i++) {
-                const img = document.createElement('img');
-                img.src = images[Math.floor(Math.random() * images.length)];
-                img.classList.add('floating-item');
-                
-                const size = Math.random() * 40 + 20;
-                img.style.width = `${size}px`;
-                img.style.height = 'auto';
-                
-                const animationName = `float${Math.floor(Math.random() * 3) + 1}`;
-                img.style.animationName = animationName;
-                
-                const animationDuration = Math.random() * 20 + 15;
-                img.style.animationDuration = `${animationDuration}s`;
-                
-                const animationDelay = Math.random() * -35;
-                img.style.animationDelay = `${animationDelay}s`;
-                
-                container.appendChild(img);
-            }
-        });
-        
-        // Modal functionality
         const usernameModal = document.getElementById('username-modal');
         const generatorModal = document.getElementById('generator-modal');
-        const cancelBtn = document.getElementById('cancel-btn');
-        const submitBtn = document.getElementById('submit-btn');
-        const usernameInput = document.getElementById('username-input');
-        const verifyBtn = document.getElementById('verify-btn');
-        const loadingItemImg = document.getElementById('loading-item-img');
+        const winnerPopup = document.getElementById('winner-popup');
+        const iosPopup = document.getElementById('ios-popup');
+        const floatingItems = document.getElementById('floating-items');
         
-        let selectedItem = null;
+        // Initialize the page
+        function init() {
+            renderBrainrots();
+            createFloatingItems();
+            checkForIOS();
+        }
         
-        // Claim button event listeners
-        document.querySelectorAll('.claim-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                selectedItem = {
-                    name: this.getAttribute('data-item'),
-                    image: this.getAttribute('data-image')
-                };
-                usernameModal.style.display = 'flex';
+        // Render brainrots to the page
+        function renderBrainrots() {
+            brainrotsList.innerHTML = '';
+            
+            brainrots.forEach((brainrot, index) => {
+                const brainrotItem = document.createElement('div');
+                brainrotItem.className = 'brainrot-item';
+                
+                // Add OG or Secret label
+                const label = document.createElement('div');
+                label.className = brainrot.type === 'og' ? 'bar-title-og' : 'bar-title-secret';
+                label.textContent = brainrot.type === 'og' ? 'OG' : 'Secret';
+                brainrotItem.appendChild(label);
+                
+                brainrotItem.innerHTML += `
+                    <div class="brainrot-icon">
+                        <img src="${brainrot.image}" alt="${brainrot.name}">
+                    </div>
+                    <div class="brainrot-content">
+                        <div class="brainrot-name">${brainrot.name}</div>
+                    </div>
+                    <button class="claim-btn" data-index="${index}">Claim</button>
+                `;
+                
+                brainrotsList.appendChild(brainrotItem);
             });
-        });
+            
+            // Add event listeners to claim buttons
+            document.querySelectorAll('.claim-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const index = this.getAttribute('data-index');
+                    openUsernameModal(index);
+                });
+            });
+        }
         
-        // Cancel button
-        cancelBtn.addEventListener('click', () => {
-            usernameModal.style.display = 'none';
-            usernameInput.value = '';
-        });
-        
-        // Submit button
-        submitBtn.addEventListener('click', () => {
-            const username = usernameInput.value.trim();
-            if (username) {
+        // Open username modal
+        function openUsernameModal(index) {
+            document.getElementById('username-input').value = '';
+            usernameModal.style.display = 'flex';
+            
+            // Set up event listeners for modal buttons
+            document.getElementById('submit-btn').onclick = function() {
+                const username = document.getElementById('username-input').value.trim();
+                if (username) {
+                    usernameModal.style.display = 'none';
+                    openGeneratorModal(index, username);
+                }
+            };
+            
+            document.getElementById('cancel-btn').onclick = function() {
                 usernameModal.style.display = 'none';
-                usernameInput.value = '';
-                runFakeGenerator(username);
-            }
-        });
+            };
+        }
         
-        // Run fake generator - Modified to stop at 95% and show verification
-        async function runFakeGenerator(username) {
+        // Open generator modal
+        function openGeneratorModal(index, username) {
+            const brainrot = brainrots[index];
+            document.getElementById('generator-title').textContent = 'Connecting...';
+            document.getElementById('loading-item-img').style.display = 'none';
+            document.getElementById('progress-fill').style.width = '0%';
+            document.getElementById('progress-fill').textContent = '0%';
+            document.getElementById('game-tip').textContent = '';
+            document.getElementById('verify-btn').style.display = 'none';
+            
             generatorModal.style.display = 'flex';
-            const generatorTitle = document.getElementById('generator-title');
-            const progressFill = document.getElementById('progress-fill');
-            const gameTip = document.getElementById('game-tip');
             
-            generatorTitle.textContent = "Connecting to servers...";
-            progressFill.style.width = "0%";
-            progressFill.textContent = "0%";
-            gameTip.textContent = "";
-            verifyBtn.style.display = 'none';
-            loadingItemImg.style.display = 'block';
-            loadingItemImg.src = selectedItem.image;
+            // Simulate connection process
+            setTimeout(() => {
+                document.getElementById('generator-title').textContent = 'Connected!';
+                document.getElementById('loading-item-img').src = brainrot.image;
+                document.getElementById('loading-item-img').style.display = 'block';
+                
+                // Simulate progress
+                let progress = 0;
+                const interval = setInterval(() => {
+                    progress += Math.random() * 10;
+                    if (progress >= 100) {
+                        progress = 100;
+                        clearInterval(interval);
+                        
+                        document.getElementById('game-tip').textContent = 'Click Verify to claim your item!';
+                        document.getElementById('verify-btn').style.display = 'block';
+                    }
+                    
+                    document.getElementById('progress-fill').style.width = `${progress}%`;
+                    document.getElementById('progress-fill').textContent = `${Math.round(progress)}%`;
+                }, 200);
+                
+                // Set up verify button
+                document.getElementById('verify-btn').onclick = function() {
+                    clearInterval(interval);
+                    document.getElementById('progress-fill').style.width = '100%';
+                    document.getElementById('progress-fill').textContent = '100%';
+                    
+                    // Simulate verification
+                    setTimeout(() => {
+                        showWinnerPopup(brainrot, username);
+                        generatorModal.style.display = 'none';
+                    }, 1000);
+                };
+            }, 1500);
+        }
+        
+        // Show winner popup
+        function showWinnerPopup(brainrot, username) {
+            document.getElementById('winner-icon').innerHTML = `<img src="${brainrot.image}" alt="${brainrot.name}">`;
+            document.getElementById('winner-text').textContent = `${username} claimed ${brainrot.name}!`;
             
-            await new Promise(resolve => setTimeout(resolve, 1500));
-            generatorTitle.textContent = `Finding user: ${username}...`;
+            winnerPopup.style.display = 'flex';
             
-            await new Promise(resolve => setTimeout(resolve, 2000));
-            generatorTitle.textContent = "User found. Generating item...";
+            setTimeout(() => {
+                winnerPopup.style.display = 'none';
+            }, 5000);
+        }
+        
+        // Create floating items
+        function createFloatingItems() {
+            const items = [
+                'https://i.postimg.cc/T31BR3xK/Early-Strawberrry-Elephant-removebg-preview.png',
+                'https://i.postimg.cc/RFtK2MVF/Untitled-design-removebg-preview.png',
+                'https://i.postimg.cc/RZ9s31zg/Screenshot-2025-09-28-at-00-44-35-removebg-preview.png'
+            ];
             
-            let progress = 0;
-            // Modified to stop at 95% instead of 100%
-            while (progress < 95) {
-                await new Promise(resolve => setTimeout(resolve, 100));
-                progress += Math.floor(Math.random() * 5) + 1;
-                if (progress > 95) progress = 95;
-                progressFill.style.width = progress + "%";
-                progressFill.textContent = progress + "%";
+            items.forEach((item, index) => {
+                const floatingItem = document.createElement('div');
+                floatingItem.className = 'floating-item';
+                
+                const img = document.createElement('img');
+                img.src = item;
+                img.style.width = '50px';
+                img.style.height = '50px';
+                img.style.opacity = '0.1';
+                
+                floatingItem.appendChild(img);
+                floatingItem.style.animationName = `float${(index % 3) + 1}`;
+                floatingItem.style.animationDuration = `${20 + Math.random() * 20}s`;
+                floatingItem.style.left = `${Math.random() * 100}%`;
+                
+                floatingItems.appendChild(floatingItem);
+            });
+        }
+        
+        // Check for iOS and show popup
+        function checkForIOS() {
+            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+            if (isIOS) {
+                setTimeout(() => {
+                    iosPopup.style.display = 'block';
+                    
+                    setTimeout(() => {
+                        iosPopup.style.display = 'none';
+                    }, 10000);
+                }, 3000);
             }
-            
-            setTimeout(() => {
-                generatorTitle.textContent = "Almost complete!";
-                // Updated verification text with bold "URGENT"
-                gameTip.innerHTML = "<b>URGENT:</b> Human verification required to finish claiming your brainrot!";
-                verifyBtn.style.display = 'block';
-                // Updated button text
-                verifyBtn.textContent = "Verify & Claim";
-            }, 500);
         }
         
-        // Verify button
-        verifyBtn.addEventListener('click', function() {
-            _JF(); // Trigger content locker
-        });
-        
-        // Winner popup logic
-        const winnerUsers = [
-            'PixelPioneer', 'BlockBash99', 'NeonNinja07', 'RoboRangerX', 'CraftyCrafter'
-        ];
-        
-        function showWinnerPopup() {
-            const user = winnerUsers[Math.floor(Math.random() * winnerUsers.length)];
-            const item = brainrots[Math.floor(Math.random() * brainrots.length)];
-            
-            const popup = document.getElementById('winner-popup');
-            const text = document.getElementById('winner-text');
-            const icon = document.getElementById('winner-icon');
-            
-            icon.innerHTML = `<img src="${item.image}" alt="${item.name}">`;
-            text.innerHTML = `<b>${user}</b> just claimed <b>${item.name}</b>! 🎉`;
-            
-            popup.style.display = 'flex';
-            popup.style.opacity = '1';
-            
-            setTimeout(() => {
-                popup.style.opacity = '0';
-            }, 1800);
-            
-            setTimeout(() => {
-                popup.style.display = 'none';
-            }, 2000);
-        }
-        
-        // Show winner popup every 5 seconds
-        setInterval(showWinnerPopup, 5000);
-        
-        // iOS detection
-        function isIOS() {
-            const userAgent = navigator.userAgent;
-            return /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
-        }
-        
-        if (isIOS()) {
-            document.getElementById('ios-popup').style.display = 'block';
-        }
+        // Initialize the page when loaded
+        window.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
 </html>
