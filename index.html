@@ -184,8 +184,8 @@
         }
         
         .pet-img-bg {
-            width: 100px;
-            height: 100px;
+            width: 80px;
+            height: 80px;
             background: rgba(233, 30, 99, 0.15);
             border: 2px solid #00e5ff;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15), 0 4px 12px rgba(0, 229, 255, 0.2), 0 0 15px rgba(0, 229, 255, 0.1);
@@ -427,6 +427,67 @@
         @keyframes float3 {
             0% { transform: translate(50vw, 110vh) rotate(0deg); }
             100% { transform: translate(50vw, -100px) rotate(360deg); }
+        }
+        
+        /* Mobile Optimizations */
+        @media (max-width: 640px) {
+            .pet-left-content {
+                gap: 10px;
+            }
+            
+            .pet-img-bg {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .pet-title {
+                font-size: 16px;
+            }
+            
+            .claim-pill {
+                padding: 10px 20px;
+                min-width: 100px;
+                height: 40px;
+                font-size: 12px;
+            }
+            
+            .rainbow-banner-text {
+                font-size: 18px;
+                padding: 8px 16px;
+            }
+            
+            .blocky-bg {
+                padding: 15px !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .pet-left-content {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+            
+            .pet-img-bg {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .pet-title {
+                font-size: 14px;
+            }
+            
+            .claim-pill {
+                padding: 8px 16px;
+                min-width: 80px;
+                height: 36px;
+                font-size: 11px;
+            }
+            
+            .rainbow-banner-text {
+                font-size: 16px;
+                padding: 6px 12px;
+            }
         }
     </style>
 </head>
