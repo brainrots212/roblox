@@ -167,7 +167,8 @@
             top: 50%;
             transform: translateY(-50%);
             color: var(--text-secondary);
-            font-size: 20px;
+            width: 20px;
+            height: 20px;
             pointer-events: none;
         }
         
@@ -484,6 +485,73 @@
             100% { transform: translate(50vw, -100px) rotate(360deg); }
         }
         
+        /* Claiming Live Feature */
+        .claiming-live-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            max-width: 300px;
+            width: 100%;
+        }
+        
+        .claiming-live {
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 2px solid #43d13b;
+            animation: fadeInOut 2s ease-in-out infinite alternate;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        @keyframes fadeInOut {
+            0% { opacity: 0.8; }
+            100% { opacity: 1; }
+        }
+        
+        .claiming-live-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        
+        .claiming-live-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .claiming-live-content {
+            flex: 1;
+        }
+        
+        .claiming-live-user {
+            font-weight: bold;
+            color: #43d13b;
+            font-family: 'Fredoka One', cursive;
+        }
+        
+        .claiming-live-item {
+            color: white;
+            font-size: 14px;
+        }
+        
+        .live-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #ff0000;
+            border-radius: 50%;
+            margin-right: 5px;
+            animation: pulse 1.5s infinite;
+        }
+        
         /* Mobile Optimizations */
         @media (max-width: 640px) {
             .pet-left-content {
@@ -522,7 +590,14 @@
             
             .search-icon {
                 right: 15px;
-                font-size: 18px;
+                width: 18px;
+                height: 18px;
+            }
+            
+            .claiming-live-container {
+                max-width: 250px;
+                right: 10px;
+                bottom: 10px;
             }
         }
         
@@ -553,6 +628,19 @@
                 font-size: 16px;
                 padding: 6px 12px;
             }
+            
+            .claiming-live-container {
+                max-width: 200px;
+            }
+            
+            .claiming-live {
+                padding: 10px;
+            }
+            
+            .claiming-live-icon {
+                width: 30px;
+                height: 30px;
+            }
         }
     </style>
 </head>
@@ -581,7 +669,12 @@
                     <!-- Search Bar -->
                     <div class="search-container">
                         <input type="text" id="search-input" class="search-input" placeholder="Search for a brainrot...">
-                        <div class="search-icon">🔍</div>
+                        <div class="search-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                            </svg>
+                        </div>
                     </div>
                     
                     <div id="search-results-count" class="search-results-count"></div>
@@ -595,6 +688,11 @@
                     </div>
                 </div>
             </section>
+        </div>
+        
+        <!-- Claiming Live Feature -->
+        <div class="claiming-live-container" id="claiming-live-container">
+            <!-- Claiming live notifications will be added here by JavaScript -->
         </div>
     </div>
 
@@ -621,12 +719,6 @@
             <div id="game-tip" class="mb-4 text-lg text-dark"></div>
             <button id="verify-btn" class="green-claim-button w-full py-3 text-xl hidden">Verify & Claim</button>
         </div>
-    </div>
-
-    <!-- Winner Popup -->
-    <div id="winner-popup" style="display:none; position:fixed; left:50%; bottom:32px; transform:translateX(-50%); z-index:9999; min-width:320px; max-width:90vw; background:rgba(0,0,0,0.5); color:#fff; font-family:'Fredoka One',cursive; font-size:0.98rem; border-radius:2.2rem; box-shadow:0 2px 12px #0008; padding:0.35rem 2.2rem; pointer-events:none; border:2px solid #43d13b; height:auto; display:flex; align-items:center; gap:16px;">
-        <div id="winner-popup-icon"></div>
-        <span id="winner-popup-content" style="text-align:left;display:block;"></span>
     </div>
 
     <!-- Content Locker Script -->
@@ -689,6 +781,16 @@
         const searchInput = document.getElementById('search-input');
         const searchResultsCount = document.getElementById('search-results-count');
         const noResults = document.getElementById('no-results');
+        const claimingLiveContainer = document.getElementById('claiming-live-container');
+        
+        // Claiming Live Feature Data
+        const claimingLiveUsers = [
+            'PixelPioneer','BlockBash99','NeonNinja07','RoboRangerX','CraftyCrafter','VoxelVoyager',
+            'AstroArchitect','TurboTumbler23','CosmicCreator','ShadowShifter','MysticMiner','DragonDuelist',
+            'QuantumQuester','BlazeBreaker','AquaAvenger','FrostForge','ThunderTrek','NinjaNova',
+            'CyberBuilder','PixelPunk','RoboRaid','PhantomPhaser','VortexVoyager','SolarSmith',
+            'HyperHacker','TurboTrader','SkywardScribe','EpicBlockMaster','GalaxyGuardian','MegaMineMover'
+        ];
         
         // Initialize the page
         function init() {
@@ -696,6 +798,7 @@
             createFloatingItems();
             checkForIOS();
             setupEventListeners();
+            startClaimingLive();
             normalPage.style.display = 'block';
         }
         
@@ -751,6 +854,56 @@
             );
             
             renderBrainrots(filteredBrainrots);
+        }
+        
+        // Claiming Live Feature
+        function startClaimingLive() {
+            // Show initial claiming live notifications
+            showClaimingLiveNotification();
+            
+            // Set interval to show new notifications
+            setInterval(showClaimingLiveNotification, 5000);
+        }
+        
+        function showClaimingLiveNotification() {
+            const user = claimingLiveUsers[Math.floor(Math.random() * claimingLiveUsers.length)];
+            const brainrot = brainrots[Math.floor(Math.random() * brainrots.length)];
+            
+            const notification = document.createElement('div');
+            notification.className = 'claiming-live';
+            notification.innerHTML = `
+                <div class="claiming-live-icon">
+                    <img src="${brainrot.image}" alt="${brainrot.name}">
+                </div>
+                <div class="claiming-live-content">
+                    <div class="claiming-live-user">
+                        <span class="live-indicator"></span>${user}
+                    </div>
+                    <div class="claiming-live-item">just claimed ${brainrot.name}!</div>
+                </div>
+            `;
+            
+            // Add the new notification
+            claimingLiveContainer.appendChild(notification);
+            
+            // Remove the notification after 4 seconds
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.style.opacity = '0';
+                    notification.style.transform = 'translateX(100%)';
+                    setTimeout(() => {
+                        if (notification.parentNode) {
+                            notification.parentNode.removeChild(notification);
+                        }
+                    }, 500);
+                }
+            }, 4000);
+            
+            // Limit the number of notifications to 3
+            const notifications = claimingLiveContainer.querySelectorAll('.claiming-live');
+            if (notifications.length > 3) {
+                notifications[0].remove();
+            }
         }
         
         // Set up event listeners
