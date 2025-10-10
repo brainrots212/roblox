@@ -130,6 +130,61 @@
             100% { background-position: 0% 50%; }
         }
         
+        /* Search Bar Styles */
+        .search-container {
+            position: relative;
+            margin-bottom: 25px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 15px 50px 15px 20px;
+            border-radius: 50px;
+            border: 2px solid var(--lighter);
+            background: var(--darker);
+            color: var(--text);
+            font-size: 16px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 4px 20px rgba(0, 255, 204, 0.3);
+        }
+        
+        .search-input::placeholder {
+            color: var(--text-secondary);
+        }
+        
+        .search-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+            font-size: 20px;
+            pointer-events: none;
+        }
+        
+        .search-results-count {
+            text-align: center;
+            margin-bottom: 15px;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 30px;
+            color: var(--text-secondary);
+            font-size: 18px;
+        }
+        
         /* Grid Container */
         .grid-container {
             display: flex;
@@ -459,6 +514,16 @@
             .blocky-bg {
                 padding: 15px !important;
             }
+            
+            .search-input {
+                padding: 12px 45px 12px 15px;
+                font-size: 14px;
+            }
+            
+            .search-icon {
+                right: 15px;
+                font-size: 18px;
+            }
         }
         
         @media (max-width: 480px) {
@@ -513,9 +578,21 @@
                         </div>
                     </div>
                     
+                    <!-- Search Bar -->
+                    <div class="search-container">
+                        <input type="text" id="search-input" class="search-input" placeholder="Search for a brainrot...">
+                        <div class="search-icon">🔍</div>
+                    </div>
+                    
+                    <div id="search-results-count" class="search-results-count"></div>
+                    
                     <ul class="grid-container" id="brainrots-list">
                         <!-- Brainrots will be added here by JavaScript -->
                     </ul>
+                    
+                    <div id="no-results" class="no-results" style="display: none;">
+                        No brainrots found matching your search.
+                    </div>
                 </div>
             </section>
         </div>
@@ -609,6 +686,9 @@
         const iosPopup = document.getElementById('ios-popup');
         const normalPage = document.getElementById('normal-page');
         const floatingItemsContainer = document.getElementById('floating-items-container');
+        const searchInput = document.getElementById('search-input');
+        const searchResultsCount = document.getElementById('search-results-count');
+        const noResults = document.getElementById('no-results');
         
         // Initialize the page
         function init() {
@@ -620,32 +700,66 @@
         }
         
         // Render brainrots to the page
-        function renderBrainrots() {
+        function renderBrainrots(filteredBrainrots = null) {
+            const brainrotsToRender = filteredBrainrots || brainrots;
+            
             brainrotsList.innerHTML = '';
             
-            brainrots.forEach((brainrot, index) => {
-                const brainrotItem = document.createElement('li');
-                brainrotItem.className = 'pet-row flex flex-row items-center justify-between rounded-2xl shadow-lg px-4 py-3 relative';
+            if (brainrotsToRender.length === 0) {
+                noResults.style.display = 'block';
+                searchResultsCount.textContent = '';
+            } else {
+                noResults.style.display = 'none';
                 
-                brainrotItem.innerHTML = `
-                    <div class="${brainrot.type === 'og' ? 'bar-title-og' : 'bar-title-secret'}">${brainrot.type === 'og' ? 'OG' : 'Secret'}</div>
-                    <div class="pet-left-content">
-                        <div class="pet-img-bg flex items-center justify-center rounded-xl">
-                            <img src="${brainrot.image}" alt="${brainrot.name}" style="width: 80px; height: 80px; object-fit: contain;" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAiIGhlaWdodD0iNTAiIHZpZXdCb3g9IjAgMCA1MCA1MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjUwIiBoZWlnaHQ9IjUwIiBmaWxsPSIjMDBmZmNjIi8+Cjx0ZXh0IHg9IjI1IiB5PSIyNSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjI0IiBmaWxsPSIjMDAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0iY2VudHJhbCI+QzwvdGV4dD4KPC9zdmc+'">
-                        </div>
-                        <div class="pet-title-container">
-                            <span class="pet-title item-title-glow">${brainrot.name}</span>
-                        </div>
-                    </div>
-                    <span class="claim-pill" onclick="openUsernameModal(${index})">Claim</span>
-                `;
+                if (filteredBrainrots) {
+                    searchResultsCount.textContent = `Showing ${brainrotsToRender.length} of ${brainrots.length} brainrots`;
+                } else {
+                    searchResultsCount.textContent = `Showing all ${brainrots.length} brainrots`;
+                }
                 
-                brainrotsList.appendChild(brainrotItem);
-            });
+                brainrotsToRender.forEach((brainrot, index) => {
+                    const brainrotItem = document.createElement('li');
+                    brainrotItem.className = 'pet-row flex flex-row items-center justify-between rounded-2xl shadow-lg px-4 py-3 relative';
+                    
+                    brainrotItem.innerHTML = `
+                        <div class="${brainrot.type === 'og' ? 'bar-title-og' : 'bar-title-secret'}">${brainrot.type === 'og' ? 'OG' : 'Secret'}</div>
+                        <div class="pet-left-content">
+                            <div class="pet-img-bg flex items-center justify-center rounded-xl">
+                                <img src="${brainrot.image}" alt="${brainrot.name}" style="width: 80px; height: 80px; object-fit: contain;" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAiIGhlaWdodD0iNTAiIHZpZXdCb3g9IjAgMCA1MCA1MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjUwIiBoZWlnaHQ9IjUwIiBmaWxsPSIjMDBmZmNjIi8+Cjx0ZXh0IHg9IjI1IiB5PSIyNSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjI0IiBmaWxsPSIjMDAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0iY2VudHJhbCI+QzwvdGV4dD4KPC9zdmc+'">
+                            </div>
+                            <div class="pet-title-container">
+                                <span class="pet-title item-title-glow">${brainrot.name}</span>
+                            </div>
+                        </div>
+                        <span class="claim-pill" onclick="openUsernameModal(${brainrots.indexOf(brainrot)})">Claim</span>
+                    `;
+                    
+                    brainrotsList.appendChild(brainrotItem);
+                });
+            }
+        }
+        
+        // Search functionality
+        function searchBrainrots(searchTerm) {
+            if (!searchTerm) {
+                renderBrainrots();
+                return;
+            }
+            
+            const filteredBrainrots = brainrots.filter(brainrot => 
+                brainrot.name.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+            
+            renderBrainrots(filteredBrainrots);
         }
         
         // Set up event listeners
         function setupEventListeners() {
+            // Search input
+            searchInput.addEventListener('input', function() {
+                searchBrainrots(this.value);
+            });
+            
             // Username modal buttons
             document.getElementById('username-modal-btn').addEventListener('click', function() {
                 const username = document.getElementById('username-modal-input').value.trim();
