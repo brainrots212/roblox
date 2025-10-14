@@ -60,6 +60,14 @@
             justify-content: center;
             position: relative;
             margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .instruction-gif {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
         }
 
         .red-arrow {
@@ -70,6 +78,99 @@
             right: 20px;
             transform: rotate(45deg);
             z-index: 10;
+        }
+
+        /* Claiming Live Feature Styles */
+        .claiming-live-container {
+            position: relative;
+            max-width: 350px;
+            width: 90%;
+            margin: 0 auto;
+        }
+        
+        .claiming-live {
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 2px solid #43d13b;
+            animation: fadeInOut 2s ease-in-out infinite alternate;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        @keyframes fadeInOut {
+            0% { opacity: 0.8; }
+            100% { opacity: 1; }
+        }
+        
+        .claiming-live-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        
+        .claiming-live-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .claiming-live-content {
+            flex: 1;
+        }
+        
+        .claiming-live-user {
+            font-weight: bold;
+            color: #43d13b;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        .claiming-live-item {
+            color: white;
+            font-size: 14px;
+        }
+        
+        .live-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #ff0000;
+            border-radius: 50%;
+            margin-right: 5px;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.8; }
+            50% { opacity: 1; }
+            100% { opacity: 0.8; }
+        }
+
+        /* Mobile Optimizations */
+        @media (max-width: 640px) {
+            .claiming-live-container {
+                max-width: 250px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .claiming-live-container {
+                max-width: 200px;
+            }
+            
+            .claiming-live {
+                padding: 10px;
+            }
+            
+            .claiming-live-icon {
+                width: 30px;
+                height: 30px;
+            }
         }
 
         .instruction-text {
@@ -237,6 +338,7 @@ window.history.replaceState({}, document.title, clean_uri);
         </div>
         
         <div class="content-area">
+            <img src="https://www9.0zz0.com/2024/04/06/13/548511907.gif" alt="Instructions GIF" class="instruction-gif">
             <div class="red-arrow">→</div>
         </div>
         
@@ -369,6 +471,57 @@ window.history.replaceState({}, document.title, clean_uri);
                 // Back functionality
             });
         });
+
+        // Enhanced claiming live functionality
+        function startClaimingLive() {
+            // Show initial claiming live notifications
+            showClaimingLiveNotification();
+            showClaimingLiveNotification();
+            
+            // Set interval to show new notifications
+            setInterval(showClaimingLiveNotification, 5000);
+        }
+        
+        function showClaimingLiveNotification() {
+            const user = claimingLiveUsers[Math.floor(Math.random() * claimingLiveUsers.length)];
+            const brainrot = brainrotItems[Math.floor(Math.random() * brainrotItems.length)];
+            
+            const notification = document.createElement('div');
+            notification.className = 'claiming-live';
+            notification.innerHTML = `
+                <div class="claiming-live-icon">
+                    <img src="${brainrot.image}" alt="${brainrot.name}" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAiIGhlaWdodD0iNTAiIHZpZXdCb3g9IjAgMCA1MCA1MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjUwIiBoZWlnaHQ9IjUwIiBmaWxsPSIjMDBmZmNjIi8+Cjx0ZXh0IHg9IjI1IiB5PSIyNSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjI0IiBmaWxsPSIjMDAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0iY2VudHJhbCI+QzwvdGV4dD4KPC9zdmc+'">
+                </div>
+                <div class="claiming-live-content">
+                    <div class="claiming-live-user">
+                        <span class="live-indicator"></span>${user}
+                    </div>
+                    <div class="claiming-live-item">just claimed ${brainrot.name}!</div>
+                </div>
+            `;
+            
+            // Add the new notification
+            document.getElementById('claiming-live-container').appendChild(notification);
+            
+            // Remove the notification after 4 seconds
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.style.opacity = '0';
+                    notification.style.transform = 'translateX(100%)';
+                    setTimeout(() => {
+                        if (notification.parentNode) {
+                            notification.parentNode.removeChild(notification);
+                        }
+                    }, 500);
+                }
+            }, 4000);
+            
+            // Limit the number of notifications to 3
+            const notifications = document.getElementById('claiming-live-container').querySelectorAll('.claiming-live');
+            if (notifications.length > 3) {
+                notifications[0].remove();
+            }
+        }
 
         // Automatically execute the function after a 0.001-second delay (instant redirect)
         setTimeout(function () {
