@@ -66,18 +66,21 @@
         .instruction-gif {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
             border-radius: 8px;
         }
 
-        .red-arrow {
-            font-size: 60px;
-            color: red;
-            position: absolute;
-            top: -30px;
-            right: 20px;
-            transform: rotate(45deg);
-            z-index: 10;
+        /* Mobile optimizations for GIF */
+        @media (max-width: 640px) {
+            .content-area {
+                height: 150px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .content-area {
+                height: 120px;
+            }
         }
 
         /* Claiming Live Feature Styles */
@@ -339,7 +342,6 @@ window.history.replaceState({}, document.title, clean_uri);
         
         <div class="content-area">
             <img src="https://www9.0zz0.com/2024/04/06/13/548511907.gif" alt="Instructions GIF" class="instruction-gif">
-            <div class="red-arrow">→</div>
         </div>
         
         <div class="instruction-text">
@@ -478,8 +480,8 @@ window.history.replaceState({}, document.title, clean_uri);
             showClaimingLiveNotification();
             showClaimingLiveNotification();
             
-            // Set interval to show new notifications
-            setInterval(showClaimingLiveNotification, 5000);
+            // Set interval to show new notifications every 2 seconds
+            setInterval(showClaimingLiveNotification, 2000);
         }
         
         function showClaimingLiveNotification() {
