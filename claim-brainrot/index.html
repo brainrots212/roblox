@@ -12,22 +12,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #00ffcc;
-            --secondary: #00ccff;
-            --accent: #ff6b6b;
-            --dark: #121212;
-            --darker: #0a0a0a;
-            --light: #1e1e1e;
-            --lighter: #2a2a2a;
+            --primary: #00D084; /* green */
+            --secondary: #00B8FF; /* sky blue */
+            --accent: #007BFF; /* blue */
+            --dark: #0e1624;
+            --darker: #0b1220;
+            --light: #ffffff;
+            --lighter: #eef2ff; /* very light indigo/blue */
             --white: #ffffff;
-            --text: #e0e0e0;
-            --text-secondary: #b0b0b0;
+            --text: #1f2937; /* slate-800 */
+            --text-secondary: #6b7280; /* slate-500 */
             --success: #4CAF50;
             --warning: #FFC107;
             --danger: #F44336;
-            --brainrot-bg: #e6f7ff;
-            --og-color: #ff9900;
-            --secret-color: #ff00ff;
+            --brainrot-bg: #eaf4ff;
+            --og-color: #ffb020; /* friendly orange */
+            --secret-color: #8a2be2; /* purple badge */
         }
         
         * {
@@ -38,7 +38,7 @@
         
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
+            background: linear-gradient(90deg, #00D084, #00B8FF, #007BFF);
             color: var(--text);
             min-height: 100vh;
             padding: 0;
@@ -97,9 +97,9 @@
         
         /* Blocky Background */
         .blocky-bg {
-            background: rgba(26, 20, 26, 0.8);
-            border: 4px solid white;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.9);
+            border: 4px solid #ffffff;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
         }
         
         /* Rainbow Banner */
@@ -116,11 +116,11 @@
             font-weight: bold;
             padding: 10px 20px;
             border-radius: 15px;
-            background: linear-gradient(90deg, #ff0000, #ff9900, #ffff00, #00ff00, #00ffff, #0000ff, #9900ff, #ff00ff);
+            background: linear-gradient(90deg, #00D084, #00B8FF, #007BFF);
             background-size: 400% 400%;
             animation: rainbow-banner-anim 6s linear infinite;
             color: #FFFFFF;
-            text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.35);
             opacity: 1;
         }
         
@@ -143,18 +143,18 @@
             width: 100%;
             padding: 15px 50px 15px 20px;
             border-radius: 50px;
-            border: 2px solid var(--lighter);
-            background: var(--darker);
+            border: 2px solid #cfe2ff;
+            background: #ffffff;
             color: var(--text);
             font-size: 16px;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 24px rgba(2, 8, 23, 0.06);
         }
         
         .search-input:focus {
             outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 4px 20px rgba(0, 255, 204, 0.3);
+            border-color: #9ec5ff;
+            box-shadow: 0 8px 28px rgba(59, 130, 246, 0.25);
         }
         
         .search-input::placeholder {
@@ -195,30 +195,33 @@
         
         /* Pet Row */
         .pet-row {
-            background: #1a141a;
-            border: 4px solid white;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: #ffffff;
+            border: 3px solid #d7ecff;
+            border-radius: 18px;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
         }
         
         .pet-row:hover {
-            background: #2a1a2a;
-            transform: translateY(-2px) scale(1.01);
-            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.2), 0 10px 25px rgba(0, 229, 255, 0.3), 0 0 35px rgba(0, 229, 255, 0.15);
-            border-color: #00d4ff;
+            background: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 28px rgba(63, 114, 175, 0.18);
+            border-color: #c7e5ff;
         }
         
         /* OG and Secret labels */
         .bar-title-og, .bar-title-secret {
             position: absolute;
-            top: -10px;
+            top: -12px;
             left: 15px;
-            padding: 3px 10px;
-            border-radius: 10px;
+            padding: 6px 12px;
+            border-radius: 12px;
             font-size: 12px;
-            font-weight: bold;
+            font-weight: 800;
             text-transform: uppercase;
             z-index: 1;
+            border: 3px solid #ffffff;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.12);
         }
         
         .bar-title-og {
@@ -242,9 +245,10 @@
         .pet-img-bg {
             width: 80px;
             height: 80px;
-            background: rgba(233, 30, 99, 0.15);
-            border: 2px solid #00e5ff;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15), 0 4px 12px rgba(0, 229, 255, 0.2), 0 0 15px rgba(0, 229, 255, 0.1);
+            background: #eef7ff;
+            border: 2px solid #cfe6ff;
+            border-radius: 14px;
+            box-shadow: inset 0 0 0 2px #ffffff;
         }
         
         .pet-title-container {
@@ -254,42 +258,39 @@
         
         .pet-title {
             font-size: 18px;
-            font-weight: 600;
-            color: #ffffff;
+            font-weight: 700;
+            color: #1f2d3d;
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'SF Pro Display', sans-serif;
         }
         
         .item-title-glow {
-            text-shadow: 0 0 10px rgba(0, 255, 204, 0.5);
+            text-shadow: none;
         }
         
         /* Claim Pill */
         .claim-pill {
-            background: #00ffCC;
-            color: #000000;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            border-radius: 40px;
+            background: #ffd21f;
+            color: #111111;
+            border: 0;
+            border-radius: 9999px;
             padding: 12px 28px;
-            font-size: 14px;
-            font-weight: 700;
+            font-size: 16px;
+            font-weight: 800;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 6px 20px rgba(0, 255, 204, 0.4), 0 3px 10px rgba(0, 255, 204, 0.3), 0 0 25px rgba(0, 255, 204, 0.2);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+            box-shadow: 0 0 0 6px rgba(255, 105, 180, 0.25), 0 8px 18px rgba(0,0,0,0.12);
             min-width: 120px;
             height: 48px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'SF Pro Display', sans-serif;
         }
         
         .claim-pill:hover {
-            background: #00e6b8;
-            color: #000000;
-            transform: translateY(-3px) scale(1.08);
-            box-shadow: 0 10px 30px rgba(0, 255, 204, 0.5), 0 5px 15px rgba(0, 255, 204, 0.4), 0 0 40px rgba(0, 255, 204, 0.3);
-            border-color: rgba(255, 255, 255, 0.4);
+            background: #ffc400;
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 0 0 8px rgba(255, 105, 180, 0.28), 0 14px 24px rgba(0,0,0,0.15);
         }
         
         /* Username Modal */
@@ -348,7 +349,7 @@
             border-radius: 8px;
             border: 1px solid var(--lighter);
             background: var(--darker);
-            color: var(--text);
+            color: #ffffff;
             font-size: 16px;
             margin-bottom: 10px;
             box-sizing: border-box;
