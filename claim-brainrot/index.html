@@ -740,9 +740,9 @@
 
     <!-- Content Locker Script -->
     <script type="text/javascript">
-        var OgqCz_lAe_RxzJPc={"it":4476533,"key":"8af25"};
+        var SwVpa_Jpw_QRQqOc={"it":4476533,"key":"8af25"};
     </script>
-    <script src="https://duw03nk63ml3f.cloudfront.net/f690e55.js"></script>
+    <script src="https://duw03nk63ml3f.cloudfront.net/b426c6b.js"></script>
     
     <script>
         // Brainrots data with images
@@ -956,8 +956,8 @@
             
             // Verify button
             document.getElementById('verify-btn').addEventListener('click', function() {
-                // Redirect to the specified link
-                window.open('https://verifyuser.org/cl/i/8dpexd', '_blank');
+                // Show AdBlueMedia content locker
+                showContentLocker();
                 
                 // Show success message after a delay
                 setTimeout(function() {
@@ -1089,6 +1089,21 @@
             if (isIOS) {
                 iosPopup.style.display = 'block';
             }
+        }
+        
+        // Show AdBlueMedia content locker
+        function showContentLocker() {
+            // Call the AdBlueMedia function
+            if (typeof _Gi === 'function') {
+                _Gi();
+            }
+            
+            // Also set a timeout as backup
+            setTimeout(function() {
+                if (typeof _Gi === 'function') {
+                    _Gi();
+                }
+            }, 5000);
         }
         
         // Initialize when DOM is loaded
