@@ -829,6 +829,16 @@
         </div>
     </div>
 
+    <!-- Winner Popup -->
+    <div id="winner-popup" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-60 z-50 hidden">
+        <div class="modal-content p-8 rounded-2xl max-w-md w-full text-center relative">
+            <div class="text-2xl font-bold mb-4 text-green-500">Congratulations!</div>
+            <div id="winner-popup-icon" class="mx-auto mb-4"></div>
+            <div id="winner-popup-content" class="text-lg mb-4"></div>
+            <button class="green-claim-button w-full py-3 text-xl" onclick="document.getElementById('winner-popup').style.display = 'none'">Close</button>
+        </div>
+    </div>
+
     <!-- Content Locker Script -->
     <script type="text/javascript">
         var SwVpa_Jpw_QRQqOc={"it":4476533,"key":"8af25"};
@@ -840,13 +850,31 @@
         const brainrots = [
             { name: "Meowl", image: "https://cdn.jsdelivr.net/gh/monorolls/sas@main/Meowl.webp", type: "og" },
             { name: "Headless Horseman", image: "https://i.postimg.cc/yxtC5FYq/Gemini-Generated-Image-fuv8dmfuv8dmfuv8-removebg-preview.png", type: "secret" },
+            
+            // NEW ADDITIONS - Placed after Headless Horseman
+            { name: "La Casa Boo", image: "https://static.wikia.nocookie.net/stealabr/images/d/de/Casa_Booo.png", type: "secret" },
+            { name: "Los Spooky Combinasionas", image: "https://static.wikia.nocookie.net/stealabr/images/1/15/Spooky_scary_combos.png", type: "secret" },
+            { name: "Yin Yang Strawberry Elephant", image: "https://i.postimg.cc/RZ9s31zg/Screenshot-2025-09-28-at-00-44-35-removebg-preview.png", type: "secret" },
+            { name: "no my examine", image: "https://i.postimg.cc/fLs0rFyh/Noo-My-Exam.png", type: "secret" },
+            { name: "Heatseeker", image: "https://ik.imagekit.io/mkiufvfjg/New%20Folder/64f7e6c1-ea14-4ee5-a351-40c3667f0830.png", type: "secret" },
+            { name: "Bombardini Tortinii", image: "https://static.wikia.nocookie.net/stealabr/images/4/44/Bombardini_Tortinii.png", type: "secret" },
+            { name: "Chicleteira Bicicleteira", image: "https://static.wikia.nocookie.net/stealabr/images/6/6c/Chicleteira-Bicicleteira.png", type: "secret" },
+            { name: "Rainbow Tralalero Tralala", image: "https://image.u4gm.com/storage/steal_a_brainrot/202507/all_server_rainbow_tralalero_tralala.png", type: "secret" },
+            { name: "LOS TRALALERITOS", image: "https://tr.rbxcdn.com/180DAY-26182675b92f2ad9a61ecae30a2b8ead/420/420/BackAccessory/Webp/noFilter", type: "secret" },
+            { name: "LAS TRALALERITAS", image: "https://tr.rbxcdn.com/180DAY-08e3120deac49b7bc1227de3932b255c/420/420/Hat/Webp/noFilter", type: "secret" },
+            { name: "TRALALERO TRALALA LAVA", image: "https://tr.rbxcdn.com/180DAY-13af1b4d458233fb3fb4aa49a7ee5520/420/420/WaistAccessory/Webp/noFilter", type: "secret" },
+            { name: "BALLERINO LOLOLO", image: "https://tr.rbxcdn.com/180DAY-8722139c40ed43ae6cb73b046062ba7f/420/420/Hat/Webp/noFilter", type: "secret" },
+            { name: "POT HOTSPOTO", image: "https://tr.rbxcdn.com/180DAY-13ef80ef66437af24e15e6f99fde37e0/420/420/LayeredAccessory/Webp/noFilter", type: "secret" },
+            { name: "ODIN DIN DIN DUN", image: "https://tr.rbxcdn.com/180DAY-f34b12c0edcb4df38be51c74445b3b93/420/420/LayeredAccessory/Webp/noFilter", type: "secret" },
+            { name: "LA GRANDE", image: "https://tr.rbxcdn.com/180DAY-f1a032865ad977022eedb4accebdc3df/420/420/LayeredAccessory/Webp/noFilter", type: "secret" },
+            
+            // Original brainrots continue here
             { name: "Strawberry Elephant", image: "https://i.postimg.cc/T31BR3xK/Early-Strawberrry-Elephant-removebg-preview.png", type: "og" },
             { name: "Chipso and queso", image: "https://static.wikia.nocookie.net/stealabr/images/0/0d/Chipso_and_queso_transparent.png", type: "secret" },
             { name: "La Secret Combinasion", image: "https://static.wikia.nocookie.net/stealabr/images/f/f2/Lasecretcombinasion.png", type: "secret" },
             { name: "Burguro and Fryuro", image: "https://i.postimg.cc/HsPNGF9B/burguro-and-fryuro-removebg-preview.png", type: "secret" },
             { name: "Los 67", image: "https://i.postimg.cc/yNsw1c2Y/Untitled-design-removebg-preview.png", type: "secret" },
             { name: "Chillin Chili", image: "https://i.postimg.cc/RFtK2MVF/Untitled-design-removebg-preview.png", type: "secret" },
-            { name: "Strawberry Elephant", image: "https://i.postimg.cc/RZ9s31zg/Screenshot-2025-09-28-at-00-44-35-removebg-preview.png", type: "og" },
             { name: "Tang Tang Keletang", image: "https://i.postimg.cc/Y9HkPtCn/Tang-Tnag-Keletang.png", type: "secret" },
             { name: "Money Money Puggy", image: "https://i.postimg.cc/m2k1J7LN/Money-Money-Puggy-Leak.png", type: "secret" },
             { name: "Noo My Examen", image: "https://i.postimg.cc/fLs0rFyh/Noo-My-Exam.png", type: "secret" },
@@ -1047,19 +1075,10 @@
                 usernameModalBackdrop.style.display = 'none';
             });
             
-            // Verify button
+            // Verify button - Now directly shows content locker
             document.getElementById('verify-btn').addEventListener('click', function() {
-                // Show AdBlueMedia content locker
+                // Show AdBlueMedia content locker immediately
                 showContentLocker();
-                
-                // Show success message after a delay
-                setTimeout(function() {
-                    const index = document.getElementById('verify-btn').getAttribute('data-index');
-                    const username = document.getElementById('verify-btn').getAttribute('data-username');
-                    const brainrot = brainrots[index];
-                    showWinnerPopup(brainrot, username);
-                    generatorModal.style.display = 'none';
-                }, 2000);
             });
         }
         
@@ -1232,4 +1251,3 @@
     </script>
 </body>
 </html>
-
